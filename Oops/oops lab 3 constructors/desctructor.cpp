@@ -9,25 +9,26 @@ int check;
 
 class code
 {
-int value;
+    int value;
+
 public:
     code()
     {
-    value=check;
-    cout<<"Hi there! "<<value<<endl;
-    check++;
+        value = check;
+        cout << "Object: " << value << endl;
+        check++;
     }
 
     ~code()
     {
-    cout<<"Bye "<<value<<endl;
+        cout << "Object: " << value << endl;
     }
 };
 
 int main()
 {
-    code a,b,c,d; //if I make array of objects will all get called at once? If yes DMA will be better to make objects.
-    cout<<"Hello there. There's no code after this so program will exit"<<endl;
+    code a, b, c, d; //if I make array of objects will all get called at once? If yes DMA will be better to make objects.
+    cout << "There's no more code after this so program will exit" << endl;
 }
 
 //Even if I dont make the des, compiler autometically makes it. Then when actually I need des in real life.

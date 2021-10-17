@@ -1,0 +1,2 @@
+For input, the strings get ignored if I put a 
+space in between.

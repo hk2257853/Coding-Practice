@@ -100,6 +100,8 @@ void split()
 void merge()
 {
     int x = GetListid(), y = GetListid();
+SortLinkedList();
+SortLinkedList();
     struct Node *ptr;
     ptr = Start[x];
     while (ptr->next != NULL) //ptr->next doesn't print last one. O I see. last one is pointing to null. so ptr becomes null!
@@ -136,7 +138,7 @@ void swapadj() //not very clear need to understand this further.
 
     // Fix the head and its next explicitly to
     // avoid many if else in while loop
-    struct Node *curr = Start[x]->next->next; //wow we can do this? or do curr->next after start->next
+    struct Node *curr = Start[x]->next->next; //wow we can do this?
     struct Node *prev = Start[x];
     Start[x] = Start[x]->next;
     Start[x]->next = prev;
@@ -164,7 +166,7 @@ int GetListid()
 
 void maxmin()
 {
-    int max = 0, min = 0; //or use start to make it equal to that
+    int max = 0, min = 0;
     struct Node *ptr, *minptr, *prevptr, *prevminptr = NULL;
     int x = GetListid();
     ptr = Start[x];
@@ -310,7 +312,7 @@ void Display()
         printf("Sub 1 marks:%d\n", ptr->marksub2);
         printf("Sub 1 marks:%d\n", ptr->marksub3);
         printf("Total: %d\n", ptr->total);
-        printf("Average: %d\n", ptr->avrg);
+        printf("Average: %d\n\n", ptr->avrg);
         //write(ptr->rollno);
         ptr = ptr->next;
         count++;

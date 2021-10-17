@@ -25,11 +25,16 @@ public:
 class add1 //a particular function is friend.
 {
 public:
-	friend void addten(Distance &d)
+	friend void addten(Distance &d);
 	{
 		d.meters = d.meters + 10;
 	}
 };
+
+// void addten(Distance &d) //I don't need to use scope resolution for add1's function
+// {						//(friend funtion's scope is wide). Just looks like global function(O yeah! its actually a global function made freind to 2 classes)
+// 	d.meters = d.meters + 10;
+// }
 
 //declaring whole class as friend.
 class addfif
