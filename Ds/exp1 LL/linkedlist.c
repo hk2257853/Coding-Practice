@@ -4,16 +4,16 @@
 FILE *fp;
 char location[1000] = "/home/sslab15/Desktop/data.txt";
 
-//currently will work for 1 linked list only
+// currently will work for 1 linked list only
 struct Node
 {
     int data;
     struct Node *next;
 };
 
-struct Node *Start = NULL; //should I dynamically allocate?
+struct Node *Start = NULL; // should I dynamically allocate?
 
-void linkedListTraversal();
+void displaylist();
 void createlist();
 void prepend();
 void append();
@@ -23,9 +23,9 @@ void InsertAfter();
 void write(int x);
 void deletebeg();
 void deleteend();
+void deleteat();
 void reverse();
 void search();
-void deleteat();
 
 void search()
 {
@@ -36,7 +36,7 @@ void search()
     struct Node *ptr;
     ptr = Start;
 
-    while (ptr != NULL) //ptr->next doesn't print last one. O I see. last one is pointing to null. so ptr becomes null!
+    while (ptr != NULL) // ptr->next doesn't print last one. O I see. last one is pointing to null. so ptr becomes null!
     {
         count++;
         if (ptr->data == num)
@@ -51,7 +51,7 @@ void search()
         printf("Element not found");
 }
 void deletebeg()
-{ //need to check if already empty.
+{ // need to check if already empty.
     struct Node *ptr;
     ptr = Start;
     Start = Start->next;
@@ -60,13 +60,13 @@ void deletebeg()
 
 void deleteat()
 {
-    //check if its not 1st.
+    // check if its not 1st.
     int pos;
     printf("Enter the position\n");
     scanf("%d", &pos);
     struct Node *ptr, *nxt;
     ptr = Start;
-    while (ptr != NULL && pos != 2) //fine tuned just for now...
+    while (ptr != NULL && pos != 2) // fine tuned just for now...
     {
         ptr = ptr->next;
         pos--;
@@ -93,7 +93,7 @@ void reverse()
 }
 
 void deleteend()
-{ //need to check if already empty or 1st element...
+{ // need to check if already empty or 1st element...
     struct Node *ptr, *prev;
     ptr = Start;
     while (ptr->next != NULL)
@@ -105,20 +105,20 @@ void deleteend()
     prev->next = NULL;
 }
 
-void linkedListTraversal()
+void displaylist()
 {
     int count = 0;
     struct Node *ptr;
     ptr = Start;
     printf("The elements are:\n");
-    while (ptr != NULL) //ptr->next doesn't print last one. O I see. last one is pointing to null. so ptr becomes null!
+    while (ptr != NULL) // ptr->next doesn't print last one. O I see. last one is pointing to null. so ptr becomes null!
     {
         printf("%d ", ptr->data);
-        //write(ptr->data);
+        // write(ptr->data);
         ptr = ptr->next;
         count++;
     }
-    printf("\nThe size of list is:%d", count); //size of list
+    printf("\nThe size of list is:%d", count); // size of list
 }
 
 void createlist()
@@ -138,7 +138,7 @@ void prepend()
     printf("Enter data:\n");
     scanf("%d", &NewNode->data);
 
-    //if list is empty
+    // if list is empty
     if (Start == NULL)
     {
         Start = NewNode;
@@ -155,7 +155,7 @@ void prepend()
 void append()
 {
 
-    //if start==null(ie list is empty just call prepend as 1st=last when only 1 element)
+    // if start==null(ie list is empty just call prepend as 1st=last when only 1 element)
     if (Start == NULL)
     {
         prepend();
@@ -170,9 +170,9 @@ void append()
         temp = Start;
         while (temp->next != NULL)
         {
-            temp = temp->next; //transverse to last node
+            temp = temp->next; // transverse to last node
         }
-        //make current last node to point to newnode. Don't delete temp. I need it for next time I call this func.
+        // make current last node to point to newnode. Don't delete temp. I need it for next time I call this func.
         temp->next = NewNode;
         temp = NewNode;
         NewNode->next = NULL;
@@ -181,9 +181,9 @@ void append()
 
 void InsertAt()
 {
-    //check for valid pos
+    // check for valid pos
 
-    //if valid
+    // if valid
     struct Node *temp;
     struct Node *NewNode = (struct Node *)malloc(sizeof(struct Node));
     printf("Enter data:\n");
@@ -197,7 +197,7 @@ void InsertAt()
     pos--;
     while (pos > 1)
     {
-        temp = temp->next; //transverse pos
+        temp = temp->next; // transverse pos
         pos--;
     }
     NewNode->next = temp->next;
@@ -206,9 +206,9 @@ void InsertAt()
 
 void Insertbefore()
 {
-    //check for valid pos
+    // check for valid pos
 
-    //if valid
+    // if valid
     struct Node *temp;
     struct Node *NewNode = (struct Node *)malloc(sizeof(struct Node));
     printf("Enter data:\n");
@@ -221,7 +221,7 @@ void Insertbefore()
 
     while (pos - 1 > 2)
     {
-        temp = temp->next; //transverse
+        temp = temp->next; // transverse
         pos--;
     }
     NewNode->next = temp->next;
@@ -230,9 +230,9 @@ void Insertbefore()
 
 void InsertAfter()
 {
-    //check for valid pos
+    // check for valid pos
 
-    //if valid
+    // if valid
     struct Node *temp;
     struct Node *NewNode = (struct Node *)malloc(sizeof(struct Node));
     printf("Enter data:\n");
@@ -245,7 +245,7 @@ void InsertAfter()
 
     while (pos > 1)
     {
-        temp = temp->next; //transverse
+        temp = temp->next; // transverse
         pos--;
     }
     NewNode->next = temp->next;
@@ -254,23 +254,23 @@ void InsertAfter()
 
 void write(int x)
 {
-    //open the file. If doesn't exist it will create one.
-    fp = fopen(location, "a"); //r for read mode. w for write mode. a to append, else it gets overwritten.
+    // open the file. If doesn't exist it will create one.
+    fp = fopen(location, "a"); // r for read mode. w for write mode. a to append, else it gets overwritten.
 
-    //writing in file
+    // writing in file
     fprintf(fp, "%d ", x);
 
-    //closes the file
+    // closes the file
     fclose(fp);
 }
 
 int main()
 {
-    int n, j = 1; //I can use j to give id to linkedlist.
+    int n, j = 1; // I can use j to give id to linkedlist.
 
     while (j)
     {
-        printf("Menu\n\n"); //Menu
+        printf("Menu\n\n"); // Menu
         printf("1 Create new linkedlist\n");
         printf("2 Display linkedlist\n");
         printf("4 Search for an element\n");
@@ -286,15 +286,15 @@ int main()
         printf("14 Exit\n");
         printf("Enter from options:\n");
 
-        scanf("%d", &n); //What user want?
+        scanf("%d", &n); // What user want?
 
         switch (n)
         {
         case 1:
-            createlist(); //use j for list id
+            createlist(); // use j for list id
             break;
         case 2:
-            linkedListTraversal();
+            displaylist();
             break;
         case 3:
 
@@ -344,7 +344,7 @@ int main()
     return 0;
 }
 
-//side note: there's still some confusion with node->next and node.
-//Also when and when not to dynamically allocate
+// side note: there's still some confusion with node->next and node.
+// Also when and when not to dynamically allocate
 
-//Remaining: make more than 1 linked list(for that I will use struct array) and take input from user.
+// Remaining: make more than 1 linked list(for that I will use struct array) and take input from user.
