@@ -9,31 +9,10 @@ void delete ();
 void Displayfront();
 void Display();
 
-int isfull();
-int isempty();
-
-int isempty()
-{
-	if (front > rear - 1)
-	{
-		return 1;
-	}
-	return 0;
-}
-
-int isfull()
-{
-	if (rear > MAX - 2)
-	{
-		return 1;
-	}
-	return 0;
-}
-
 void Display()
 {
 	printf("The elements are: ");
-	for (int i = front + 1; i <= rear; i++)
+	for (int i = front; i <= rear; i++)
 	{
 		printf("%d ", queue[i]);
 	}
@@ -41,31 +20,33 @@ void Display()
 
 void Displayfront()
 {
-	printf("Front: %d", queue[front + 1]);
+	printf("Front: %d", queue[front]);
 }
 
 void delete ()
 {
-
-	if (!isempty())
-	{
-		front++;
-		queue[front] = 0;
-	}
-	else
+	if (front > rear || front == -1)
 	{
 		printf("Queue is empty");
 	}
+	else
+	{
+		front++;
+	}
 }
 
-void insert()
+void insert(int x)
 {
 
-	if (!isfull())
+	if (rear == -1 && front == -1)
+	{
+		rear = 0, front = 0;
+		queue[rear] = x;
+	}
+	else if (rear < MAX - 1)
 	{
 		rear++;
-		printf("Enter data: ");
-		scanf("%d", &queue[rear]);
+		queue[rear] = x;
 	}
 	else
 	{
@@ -75,6 +56,7 @@ void insert()
 
 int main()
 {
+	int x;
 	while (1)
 	{
 		printf("1 Insert\n");
@@ -88,7 +70,9 @@ int main()
 		switch (n)
 		{
 		case 1:
-			insert();
+			printf("Enter data: ");
+			scanf("%d", &x);
+			insert(x);
 			break;
 		case 2:
 			delete ();

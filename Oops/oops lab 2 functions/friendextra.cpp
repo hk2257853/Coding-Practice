@@ -2,10 +2,6 @@
 using namespace std;
 //from code with harry.
 //This is extra. No need to checkout. For
-//exam only the from friend.cpp r req.
-//for interview its mostly dsa. They may ask about friend funct.
-
-// Forward declaration
 class Complex;
 
 class Calculator
