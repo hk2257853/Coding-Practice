@@ -1,18 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
 #include <stdlib.h>
 
-#define BLANK ' '
-#define TAB '\t'
-#define MAX 50
+#define MAX 100
 
 char *pop();
 char prefix[MAX];
 char stack[MAX][MAX];
 void push(char *str);
-int isempty();
-int whitespace(char symbol);
 void prefixtopostfix();
 int top;
 
@@ -37,26 +32,23 @@ void prefixtopostfix()
         temp[0] = symbol;
         temp[1] = '\0';
 
-        if (!whitespace(symbol))
+        switch (symbol)
         {
-            switch (symbol)
-            {
-            case '+':
-            case '-':
-            case '*':
-            case '/':
-            case '%':
-            case '^':
-                strcpy(operand1, pop());
-                strcpy(operand2, pop());
-                strcpy(strin, operand1);
-                strcat(strin, operand2);
-                strcat(strin, temp);
-                push(strin);
-                break;
-            default:
-                push(temp);
-            }
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+        case '%':
+        case '^':
+            strcpy(operand1, pop());
+            strcpy(operand2, pop());
+            strcpy(strin, operand1);
+            strcat(strin, operand2);
+            strcat(strin, temp);
+            push(strin);
+            break;
+        default:
+            push(temp);
         }
     }
     printf("\nPostfix Expression :: ");
@@ -65,16 +57,8 @@ void prefixtopostfix()
 
 void push(char *str)
 {
-    if (top > MAX)
-    {
-        printf("\nStack overflow\n");
-        exit(1);
-    }
-    else
-    {
-        top = top + 1;
-        strcpy(stack[top], str);
-    }
+    top = top + 1;
+    strcpy(stack[top], str);
 }
 
 char *pop()
@@ -86,20 +70,4 @@ char *pop()
     }
     else
         return (stack[top--]);
-}
-
-int isempty()
-{
-    if (top == -1)
-        return 1;
-    else
-        return 0;
-}
-
-int whitespace(char symbol)
-{
-    if (symbol == BLANK || symbol == TAB || symbol == '\0')
-        return 1;
-    else
-        return 0;
 }
