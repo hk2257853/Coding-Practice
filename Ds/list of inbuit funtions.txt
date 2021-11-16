@@ -1,3 +1,6 @@
+Note: I often forget to pust & for scanf.
+The compiler doesn't even give error so be careful.
+
 strlen() 
 pow(a,b) a^b
 

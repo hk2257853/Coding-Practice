@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #define MAX 4
 
-int ind = -1; // assuming index starts from 1
+int ind = -1;
 int ind2 = MAX;
 int stack[MAX];
 int stack2[MAX];
@@ -80,8 +80,6 @@ void pop()
 	}
 	else
 	{
-
-		stack[ind] = 0;
 		ind--;
 	}
 }

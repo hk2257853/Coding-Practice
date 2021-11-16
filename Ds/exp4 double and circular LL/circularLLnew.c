@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//search advantages/usesof circularLL
+// search advantages/usesof circularLL
 struct Node
 {
     int data;
@@ -76,56 +76,55 @@ void createlist()
 
 void add_end()
 {
-    struct Node *newnode=(struct Node*)malloc(sizeof(struct Node));
+    struct Node *newnode = (struct Node *)malloc(sizeof(struct Node));
     printf("Enter data: ");
     scanf("%d", &newnode->data);
 
-if(last==NULL)
-{
-    last=newnode;
-    newnode->next=newnode;
-}
-else{
-newnode->next=last->next;
-last->next=newnode;
-last=newnode;
-
-}
+    if (last == NULL)
+    {
+        last = newnode;
+        newnode->next = newnode;
+    }
+    else
+    {
+        newnode->next = last->next;
+        last->next = newnode;
+        last = newnode;
+    }
 }
 
 void displaylist()
 {
-struct Node *temp=last;
-while(temp->next!=last)
-{
-temp=temp->next;
-printf("%d ", temp->data);
-}
+    struct Node *temp = last;
+    while (temp->next != last)
+    {
+        temp = temp->next;
+        printf("%d ", temp->data);
+    }
 
-printf("%d", last->data);
+    printf("%d", last->data);
 }
 
 void add_beg()
 {
-    if(last==NULL)
+    if (last == NULL)
     {
-    add_end();
+        add_end();
     }
     else
     {
-    struct Node *newnode=(struct Node*)malloc(sizeof(struct Node));
-    printf("Enter data: ");
-    scanf("%d", &newnode->data);
+        struct Node *newnode = (struct Node *)malloc(sizeof(struct Node));
+        printf("Enter data: ");
+        scanf("%d", &newnode->data);
 
-	newnode->next=last->next;
-	last->next=newnode;
+        newnode->next = last->next;
+        last->next = newnode;
     }
-
 }
 
 void add_after()
 {
-struct Node *temp;
+    struct Node *temp;
     struct Node *NewNode = (struct Node *)malloc(sizeof(struct Node));
     printf("Enter data:\n");
     scanf("%d", &NewNode->data);
@@ -140,7 +139,7 @@ struct Node *temp;
         temp = temp->next; // transverse
         pos--;
     }
-    NewNode->next = temp->next; //ques: insert after last means have isert to 1st?
+    NewNode->next = temp->next; // ques: insert after last means have isert to 1st?
     temp->next = NewNode;
 }
 
@@ -167,8 +166,31 @@ void add_before()
 
 void deletenode()
 {
-    struct Node *temp=last->next;
-    last=temp->next;
-    free(temp);
+    struct Node *temp = last;
 
+    // there's only 1 element
+    if (last->next == last)
+    {
+        last = NULL;
+        free(temp); // its circluar LL. temp is pointing to the only element
+        return;
+    }
+
+    printf("Enter position: ");
+    int pos;
+    scanf("%d", &pos);
+    while (pos > 1)
+    {
+        temp = temp->next;
+        pos--;
+    }
+
+    if (temp->next == last) // if last one need to be deleted
+    {
+        last = temp;
+    }
+
+    struct Node *ptr = temp->next;
+    temp->next = ptr->next;
+    free(ptr);
 }
