@@ -6,7 +6,7 @@
 
 char *pop();
 char prefix[MAX];
-char stack[MAX][MAX];
+char stack[MAX][MAX]; // string array: 2D character array
 void push(char *str);
 void prefixtopostfix();
 int top;
@@ -32,22 +32,17 @@ void prefixtopostfix()
         temp[0] = symbol;
         temp[1] = '\0';
 
-        switch (symbol)
+        if (symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/')
         {
-        case '+':
-        case '-':
-        case '*':
-        case '/':
-        case '%':
-        case '^':
             strcpy(operand1, pop());
             strcpy(operand2, pop());
             strcpy(strin, operand1);
             strcat(strin, operand2);
             strcat(strin, temp);
             push(strin);
-            break;
-        default:
+        }
+        else
+        {
             push(temp);
         }
     }

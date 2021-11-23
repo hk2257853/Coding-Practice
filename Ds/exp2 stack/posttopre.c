@@ -7,7 +7,7 @@
 #define TAB '\t'
 #define MAX 50
 
-char stack[MAX];
+char stack[30];
 int ind = -1;
 
 void display();
@@ -31,12 +31,17 @@ void input()
 
     for (int i = 0; i < strlen(str); i++)
     {
+        char temp[2];
+        temp[0] = str[i];
+        temp[1] = '\0';
         if (str[i] == '+' || str[i] == '/' || str[i] == '*' || str[i] == '-')
         {
-            // strcat(str[i], pop());
-            // strcat(str[i], pop());
-            printf("%c", str[i]);
-            //            push(str[i]);
+            char operand1[MAX], operand2[MAX];
+            strcpy(operand1, pop());
+            strcpy(operand2, pop());
+            strcat(operand1, operand2);
+            strcat(operand1, str[i]);
+            push(operand1);
         }
         else
         {
@@ -52,7 +57,7 @@ void display() // bottom to top
 {
     for (int i = 0; i <= ind; i++)
     {
-        printf("%c ", stack[i]);
+        printf("%c", stack[i]);
     }
 }
 

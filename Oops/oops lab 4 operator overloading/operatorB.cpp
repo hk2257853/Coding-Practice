@@ -22,7 +22,7 @@ public:
         return temp;
     }
 
-    friend num operator+(int c1, num &c2) //if I write  int &c1, it gives error
+    friend num operator+(int c1, num &c2) // if I write  int &c1, it gives error
     {
         num temp;
         temp.x = c1 + c2.x;

@@ -13,12 +13,34 @@ public:
         x = a;
     }
 
-    unary operator++(int) //after putting int as paramenter it worked!! understand this topic further
+    unary operator++() // after removing int as paramenter it worked!! understand this topic further
+    {
+        unary temp;
+        temp.x = ++x;
+        return temp;
+    }
+
+    unary operator++(int) // after putting int as paramenter it worked!! understand this topic further
     {
         unary temp;
         temp.x = x++;
         return temp;
     }
+
+    unary operator--()
+    {
+        unary temp;
+        temp.x = --x;
+        return temp;
+    }
+
+    unary operator--(int)
+    {
+        unary temp;
+        temp.x = x--;
+        return temp;
+    }
+
     void Display()
     {
         cout << "x: " << x << endl;
@@ -28,7 +50,11 @@ public:
 int main()
 {
     unary c1(5);
+    ++c1;
     c1++;
+    c1.Display();
+    --c1;
+    c1--;
     c1.Display();
 
     return 0;

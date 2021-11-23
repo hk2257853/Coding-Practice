@@ -1,3 +1,0 @@
-//don't make all as friend operaB
-//combine increment and decrement in 1 OperaA
-//DMA cons n des

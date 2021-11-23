@@ -18,7 +18,7 @@ void enqueue(int element)
         rear = 0;
         queue[rear] = element;
     }
-    else if ((rear + 1) % max == front)
+    else if ((rear + 1) % max == front) // f in front of r
     {
         printf("Queue is full\n");
     }
@@ -31,13 +31,13 @@ void enqueue(int element)
 
 int dequeue()
 {
-    if ((front == -1) && (rear == -1))
+    if (front == -1 && rear == -1)
     {
         printf("Queue empty\n");
     }
     else if (front == rear)
-    {
-        front = -1;
+    {               // My way: after deletion checking if f is in front of r and then send to -1. But that will be extra code... this is simple n good
+        front = -1; // I can do withot sending to -1 too but this way checking for empty condition becomes much simpler
         rear = -1;
     }
     else

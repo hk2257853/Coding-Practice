@@ -40,6 +40,9 @@ void delete ()
 		temp = front;
 		front = front->next;
 		free(temp);
+
+		if (front == NULL)
+			rear = NULL;
 	}
 	else
 	{

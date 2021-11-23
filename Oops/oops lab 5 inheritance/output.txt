@@ -1,0 +1,39 @@
+Enter total students in each brach: 1
+Enter student info: 
+Arts: 
+Enter Name: Raj     
+Enter rollno: 10
+Enter sketch marks: 70
+Enter colortheory marks: 80
+Medical:    
+Enter Name: May
+Enter rollno: 16
+Enter biology marks: 80
+Enter pyschology marks: 95
+Computer: 
+Enter Name: Max
+Enter rollno: 55
+Enter math marks: 78
+Enter workshop marks: 95
+Enter OOPs marks: 65
+Mechanical: 
+Enter Name: Ajay
+Enter rollno: 12
+Enter math marks: 65
+Enter workshop marks: 88
+Enter thermodynamics marks: 95
+Electronics: 
+Enter Name: Abi
+Enter rollno: 95
+Enter math marks: 75
+Enter workshop marks: 95
+Enter digital_electronics marks: 88
+
+Enter Name to search: Abi
+
+Name: Abi
+RollNO: 95
+math marks: 75
+workshop marks: 95
+digital_electronics marks: 88
+

@@ -22,10 +22,10 @@ string pop()
 
 void input()
 {
-    string str = "AB+";
+    string str = "abc/-ad/e-*";
     for (int i = 0; i < str.size(); i++)
     {
-        if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '*')
+        if (str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/')
         {
             string a = pop();
             string b = pop();

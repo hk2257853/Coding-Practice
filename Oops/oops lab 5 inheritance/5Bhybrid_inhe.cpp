@@ -75,3 +75,5 @@ int main()
 
     return 0;
 }
+
+// Changes: display marks. take name roll no 1st
