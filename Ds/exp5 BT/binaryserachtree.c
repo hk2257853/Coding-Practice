@@ -15,8 +15,71 @@ struct Node
 struct Node *root = NULL;
 
 void add_node(int n);
-void preorder();
+void preorder(struct Node *node);
+void inorder(struct Node *node);
+void postorder(struct Node *node);
+void search();
+void printlevel(struct Node *node, int lvl);
+void deletenode(struct Node *root, int num);
+struct Node *delete_queue();
+void levelorder();
+void add_node(int n);
+int height();
+int printwidth(struct Node *node, int lvl);
+int maxnum(int num1, int num2);
 
+int maxnum(int num1, int num2)
+{
+    return (num1 > num2) ? num1 : num2;
+}
+
+int height(struct Node *node)
+{
+    if (node == NULL)
+        return 0;
+
+    int left = height(node->left);
+    int right = height(node->right);
+
+    return 1 + maxnum(left, right);
+}
+
+void printallwidth()
+{
+    int treeheight = height(root);
+    for (int i = 0; i < treeheight; i++)
+    {
+        printf("Level %d Width: ", i);
+        printf("%d\n", printwidth(root, i));
+    }
+}
+
+int printwidth(struct Node *node, int lvl)
+{
+    if (node == NULL)
+        return 0;
+    else if (lvl == 0)
+    {
+        return 1;
+    }
+    int left = printwidth(node->left, lvl - 1);
+    int right = printwidth(node->right, lvl - 1);
+
+    return left + right;
+}
+
+void printlevel(struct Node *node, int lvl)
+{
+    if (node == NULL)
+        return;
+    else if (lvl == 0)
+        printf("%d ", node->data);
+
+    printlevel(node->left, lvl - 1);
+    printlevel(node->right, lvl - 1);
+}
+
+// edge cases (wrt root) remaining
 void deletenode(struct Node *root, int num)
 {
 
@@ -67,9 +130,9 @@ void deletenode(struct Node *root, int num)
             minptr = minptr->left;
         }
 
-        ptr->data = minptr->data;
-        minptr->data = num;
-        deletenode(minptr, num);
+        int minptrdata = minptr->data; // by doing this little change it started working!
+        deletenode(root, minptrdata);  // Earlier I 1st exchanged data n then deleted due
+        ptr->data = minptrdata;        // to which the nos were no more in that sorted way
     }
 }
 
@@ -86,6 +149,7 @@ struct Node *delete_queue()
         return temp;
     }
 }
+
 void search()
 {
     int num;
@@ -221,20 +285,26 @@ void add_node(int n)
 
 int main()
 {
-    int arry[] = {5, 3, 11};
+    int arry[] = {5, 3, 11, 17, 16, 32, 4, 1};
 
     for (int i = 0; i < sizeof(arry) / sizeof(arry[0]); i++)
     {
         add_node(arry[i]);
     }
-    // search();
-    //  printf("preorder Transversal: ");
-    preorder(root);
-    printf("\nEnter Node to delete: ");
-    int num;
-    // scanf("%d", &num);
-    deletenode(root, 5);
-    preorder(root);
+
+    // printf("%d", height(root));
+    printallwidth();
+    printf("\n");
+    printlevel(root, 2);
+
+    //  search();
+    //   printf("preorder Transversal: ");
+    //  preorder(root);
+    //  printf("\nEnter Node to delete: ");
+    //  int num;
+    //  scanf("%d", &num);
+    //  deletenode(root, 3);
+    //  preorder(root);
 
     // printf("\ninorder Transversal: ");
     // inorder(root);

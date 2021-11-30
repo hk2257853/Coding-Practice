@@ -20,67 +20,121 @@ void push();
 struct Node *pop();
 int isempty();
 
-// tr's code is not working. Ask someone/check on yt later.
 void nrec_postorder()
 {
-    struct Node *ptr = root, *q = root;
-    while (1)
+    struct Node *ptr = root;
+    while (ptr != NULL || !isempty())
     {
-        while (ptr->left)
+        while (ptr != NULL)
         {
             push(ptr);
             ptr = ptr->left;
         }
-
-        while (ptr->right != NULL || ptr->right == q)
+        if (stack[ind]->right)
         {
-            printf("%c ", ptr->data);
-            q = ptr;
-            if (isempty())
-                return;
-            ptr = pop();
+            ptr = stack[ind]->right;
         }
-        push(ptr);
-        ptr = ptr->right;
+        else
+        { // this part I need to get:(I understood 70% on my own but having a small issue)
+
+            struct Node *temp = pop(); // like a do while loop..
+            printf("%d ", temp->data);
+            while (!isempty() && temp == stack[ind]->right)
+            {
+                temp = pop();
+                printf("%d ", temp->data);
+            }
+        }
     }
 }
+
+// tr's code is not working. Ask someone/check on yt later.
+// void nrec_postorder()
+// {
+//     struct Node *ptr = root, *q = root;
+//     while (1)
+//     {
+//         while (ptr->left)
+//         {
+//             push(ptr);
+//             ptr = ptr->left;
+//         }
+
+//         while (ptr->right != NULL || ptr->right == q)
+//         {
+//             printf("%c ", ptr->data);
+//             q = ptr;
+//             if (isempty())
+//                 return;
+//             ptr = pop();
+//         }
+//         push(ptr);
+//         ptr = ptr->right;
+//     }
+// }
 
 // understand this:
 void nonrecur_inorder()
 {
     struct Node *ptr = root;
-    while (1)
+    while (ptr != NULL || !isempty())
     {
-        while (ptr->left)
+        while (ptr)
         {
             push(ptr);
             ptr = ptr->left;
         }
 
-        while (!ptr->right)
-        {
-            printf("%d ", ptr->data);
-            if (isempty())
-                return;
-            ptr = pop();
-        }
+        ptr = pop();
         printf("%d ", ptr->data);
         ptr = ptr->right;
+
+        // Tr's:
+        //  while (ptr->left)
+        //  {
+        //      push(ptr);
+        //      ptr = ptr->left;
+        //  }
+
+        // while (!ptr->right)
+        // {
+        //     printf("%d ", ptr->data);
+        //     if (isempty())
+        //         return;
+        //     ptr = pop();
+        // }
+        // printf("%d ", ptr->data);
+        // ptr = ptr->right;
     }
 }
 
 void nonrecur_preorder()
 {
-    push(root);
-    while (!isempty())
+    struct Node *ptr = root;
+    while (ptr != NULL || !isempty())
     {
-        struct Node *temp = pop();
-        printf("%d ", temp->data);
-        if (temp->right)
-            push(temp->right);
-        if (temp->left)
-            push(temp->left);
+        while (ptr)
+        {
+            printf("%d ", ptr->data);
+            push(ptr);
+            ptr = ptr->left;
+        }
+
+        ptr = pop();
+        ptr = ptr->right;
     }
+
+    // on my own... but sucks...
+    //  push(root);
+    //  while (!isempty())
+    //  {
+    //      struct Node *temp = pop();
+    //      printf("%d ", temp->data);
+    //      if (temp->right)
+    //          push(temp->right);
+    //      if (temp->left)
+    //          push(temp->left);
+    //  }
 }
 
 void preorder(struct Node *node)
@@ -173,6 +227,7 @@ int main()
     nrec_postorder();
     printf("\npostorder Transversal: ");
     postorder(root);
+    printf("hi");
 }
 
 // stack code:
