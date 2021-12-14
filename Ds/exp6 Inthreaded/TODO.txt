@@ -1,0 +1,1 @@
+Edge case: skew tree and I want to delete the root.

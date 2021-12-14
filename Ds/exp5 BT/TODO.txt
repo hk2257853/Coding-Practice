@@ -1,0 +1,3 @@
+Edge case: skew tree and I want to delete the root.
+
+Remaining for AVL and threaded too...

@@ -14,19 +14,21 @@ struct Node
 
 struct Node *root = NULL;
 
-void add_node(int n);
-void preorder(struct Node *node);
-void inorder(struct Node *node);
-void postorder(struct Node *node);
-void search();
-void printlevel(struct Node *node, int lvl);
-void deletenode(struct Node *root, int num);
-struct Node *delete_queue();
-void levelorder();
-void add_node(int n);
-int height();
-int printwidth(struct Node *node, int lvl);
-int maxnum(int num1, int num2);
+// void add_node(int n);
+// void preorder(struct Node *node);
+// void inorder(struct Node *node);
+// void postorder(struct Node *node);
+// void search();
+// void deletenode(struct Node *root, int num);
+// void printlevel(struct Node *node, int lvl);
+// void deletenode(struct Node *root, int num);
+// struct Node *delete_queue();
+// void levelorder();
+// void add_node(int n);
+// int height();
+// void printallwidth();
+// int printwidth(struct Node *node, int lvl);
+// int maxnum(int num1, int num2);
 
 int maxnum(int num1, int num2)
 {
@@ -44,16 +46,6 @@ int height(struct Node *node)
     return 1 + maxnum(left, right);
 }
 
-void printallwidth()
-{
-    int treeheight = height(root);
-    for (int i = 0; i < treeheight; i++)
-    {
-        printf("Level %d Width: ", i);
-        printf("%d\n", printwidth(root, i));
-    }
-}
-
 int printwidth(struct Node *node, int lvl)
 {
     if (node == NULL)
@@ -68,21 +60,30 @@ int printwidth(struct Node *node, int lvl)
     return left + right;
 }
 
+void printallwidth()
+{
+    int treeheight = height(root);
+    for (int i = 0; i < treeheight; i++)
+    {
+        printf("Level %d Width: ", i);
+        printf("%d\n", printwidth(root, i));
+    }
+}
+
 void printlevel(struct Node *node, int lvl)
 {
     if (node == NULL)
         return;
-    else if (lvl == 0)
+    else if (lvl == 0) // Base case: tree has only level 1 (my level starts from 0)
         printf("%d ", node->data);
 
-    printlevel(node->left, lvl - 1);
+    printlevel(node->left, lvl - 1); // if I need to print 5 then I need 4
     printlevel(node->right, lvl - 1);
 }
 
 // edge cases (wrt root) remaining
 void deletenode(struct Node *root, int num)
 {
-
     // Go at required location
     struct Node *ptr = root, *prev;
     while (ptr->data != num)
@@ -102,14 +103,14 @@ void deletenode(struct Node *root, int num)
     {
         if (prev->left == ptr)
             prev->left = NULL;
-        if (prev->right == ptr)
+        else
             prev->right = NULL;
         free(ptr);
     }
     else if (ptr->left == NULL && ptr->right != NULL) // has one child
     {
         if (prev->left == ptr)
-            prev->right = ptr->right;
+            prev->left = ptr->right;
         if (prev->right == ptr)
             prev->right = ptr->right;
         free(ptr);
@@ -119,10 +120,10 @@ void deletenode(struct Node *root, int num)
         if (prev->left == ptr)
             prev->left = ptr->left;
         if (prev->right == ptr)
-            prev->left = ptr->left;
+            prev->right = ptr->left;
         free(ptr);
     }
-    else if (ptr->left != NULL && ptr->right != NULL) // 2 child. Not working
+    else if (ptr->left != NULL && ptr->right != NULL) // 2 child
     {
         struct Node *minptr = ptr->right;
         while (minptr->left != NULL)
@@ -150,40 +151,7 @@ struct Node *delete_queue()
     }
 }
 
-void search()
-{
-    int num;
-    printf("Enter Number: ");
-    scanf("%d", &num);
-
-    struct Node *ptr = root;
-    int flag = 0;
-
-    while (ptr != NULL && flag != 1)
-    {
-
-        if (num == ptr->data)
-        {
-            printf("Element is present\n");
-            flag = 1;
-            break;
-        }
-
-        if (num > ptr->data)
-        {
-            ptr = ptr->right;
-        }
-        else
-        {
-            ptr = ptr->left;
-        }
-    }
-
-    if (flag == 0)
-        printf("not present\n");
-}
-
-void insert(struct Node *x)
+void insert_queue(struct Node *x)
 {
     if (rear == -1 && front == -1)
     {
@@ -199,51 +167,6 @@ void insert(struct Node *x)
     {
         printf("Queue is full");
     }
-}
-
-void levelorder()
-{
-    insert(root);
-
-    while (front <= rear)
-    {
-        struct Node *temp = delete_queue();
-        printf("%d ", temp->data);
-        if (temp->left)
-            insert(temp->left);
-        if (temp->right)
-            insert(temp->right);
-    }
-}
-
-void preorder(struct Node *node)
-{
-    if (node == NULL)
-        return;
-
-    printf("%d ", node->data);
-    preorder(node->left);
-    preorder(node->right);
-}
-
-void inorder(struct Node *node)
-{
-    if (node == NULL)
-        return;
-
-    inorder(node->left);
-    printf("%d ", node->data);
-    inorder(node->right);
-}
-
-void postorder(struct Node *node)
-{
-    if (node == NULL)
-        return;
-
-    postorder(node->left);
-    postorder(node->right);
-    printf("%d ", node->data);
 }
 
 void add_node(int n)
@@ -283,6 +206,84 @@ void add_node(int n)
     }
 }
 
+void search()
+{
+    int num;
+    printf("Enter Number: ");
+    scanf("%d", &num);
+
+    struct Node *ptr = root;
+    int flag = 0;
+
+    while (ptr != NULL && flag != 1)
+    {
+
+        if (num == ptr->data)
+        {
+            printf("Element is present\n");
+            flag = 1;
+            break;
+        }
+
+        if (num > ptr->data)
+        {
+            ptr = ptr->right;
+        }
+        else
+        {
+            ptr = ptr->left;
+        }
+    }
+
+    if (flag == 0)
+        printf("not present\n");
+}
+
+void levelorder()
+{
+    insert_queue(root);
+
+    while (front <= rear)
+    {
+        struct Node *temp = delete_queue();
+        printf("%d ", temp->data);
+        if (temp->left)
+            insert_queue(temp->left);
+        if (temp->right)
+            insert_queue(temp->right);
+    }
+}
+
+void preorder(struct Node *node)
+{
+    if (node == NULL)
+        return;
+
+    printf("%d ", node->data);
+    preorder(node->left);
+    preorder(node->right);
+}
+
+void inorder(struct Node *node)
+{
+    if (node == NULL)
+        return;
+
+    inorder(node->left);
+    printf("%d ", node->data);
+    inorder(node->right);
+}
+
+void postorder(struct Node *node)
+{
+    if (node == NULL)
+        return;
+
+    postorder(node->left);
+    postorder(node->right);
+    printf("%d ", node->data);
+}
+
 int main()
 {
     int arry[] = {5, 3, 11, 17, 16, 32, 4, 1};
@@ -291,8 +292,6 @@ int main()
     {
         add_node(arry[i]);
     }
-
-    // printf("%d", height(root));
     printallwidth();
     printf("\n");
     printlevel(root, 2);

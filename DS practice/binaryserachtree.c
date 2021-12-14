@@ -36,14 +36,13 @@ void nrec_postorder()
         }
         else
         { // this part I need to get:(I understood 70% on my own but having a small issue)
-
-            struct Node *temp = pop(); // like a do while loop..
-            printf("%d ", temp->data);
-            while (!isempty() && temp == stack[ind]->right)
+            struct Node *temp;
+            do
             {
                 temp = pop();
                 printf("%d ", temp->data);
-            }
+            } while (!isempty() && temp == stack[ind]->right);
+            // temp == stack[ind]->right wanna know if we r done visiting right child of top
         }
     }
 }
@@ -109,9 +108,9 @@ void nonrecur_inorder()
 }
 
 void nonrecur_preorder()
-{
+{ // Biggest question: how to take proper test cases?
     struct Node *ptr = root;
-    while (ptr != NULL || !isempty())
+    while (ptr != NULL || !isempty()) // I forgot to learn about this!!
     {
         while (ptr)
         {
@@ -227,7 +226,7 @@ int main()
     nrec_postorder();
     printf("\npostorder Transversal: ");
     postorder(root);
-    printf("hi");
+    printf("\nhi");
 }
 
 // stack code:

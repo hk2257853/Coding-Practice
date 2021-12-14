@@ -151,26 +151,35 @@ public:
 
 int main()
 {
-    // creating objects of each:
-    cout << "Enter total students in each brach: ";
-    int n;
-    cin >> n;
-    cout << "Enter student info: " << endl;
+    //  creating objects of each:
+    int narts, ncomp, nmech, netc, nmed;
+    cout << "Enter total students in each arts: ";
+    cin >> narts;
+    cout << "Enter total students in each medical: ";
+    cin >> nmed;
+    cout << "Enter total students in each computer: ";
+    cin >> ncomp;
+    cout << "Enter total students in each mechanical: ";
+    cin >> nmech;
+    cout << "Enter total students in each electronics: ";
+    cin >> netc;
 
+    cout << "Enter student info: " << endl;
     cout << "Arts: " << endl;
-    arts *a = new arts[n];
+    arts *a = new arts[narts];
     cout << "Medical: " << endl;
-    medical *m = new medical[n];
-    // cout << "Computer: " << endl;
-    // comp *c = new comp[n];
-    // cout << "Mechanical: " << endl;
-    // mech *me = new mech[n];
-    // cout << "Electronics: " << endl;
-    // etc *e = new etc[n];
+    medical *m = new medical[nmed];
+    cout << "Computer: " << endl;
+    comp *c = new comp[ncomp];
+    cout << "Mechanical: " << endl;
+    mech *me = new mech[nmech];
+    cout << "Electronics: " << endl;
+    etc *e = new etc[netc];
 
     // Search wrt name:
     while (1)
     {
+        // QUESTION: do I need to search as common or take 'brach' n name/rollno from user?
         string inputname;
         cout << "\nEnter Name to search: ";
         cin >> inputname;
@@ -181,12 +190,12 @@ int main()
                 a[i].displayinfo();
             if (!inputname.compare(m[i].getname()))
                 m[i].displayinfo();
-            // if (!inputname.compare(c[i].getname()))
-            //     c[i].displayinfo();
-            // if (!inputname.compare(me[i].getname()))
-            //     me[i].displayinfo();
-            // if (!inputname.compare(e[i].getname()))
-            //     e[i].displayinfo();
+            if (!inputname.compare(c[i].getname()))
+                c[i].displayinfo();
+            if (!inputname.compare(me[i].getname()))
+                me[i].displayinfo();
+            if (!inputname.compare(e[i].getname()))
+                e[i].displayinfo();
         }
     }
 }

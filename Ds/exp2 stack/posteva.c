@@ -13,7 +13,7 @@ int pop()
 }
 
 int main()
-{
+{ // add part from here as funtion in in to post code
     char exp[20];
     char *e;
     int n1, n2, n3, num;

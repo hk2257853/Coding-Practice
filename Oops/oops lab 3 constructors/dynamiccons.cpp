@@ -1,31 +1,30 @@
 #include <iostream>
+#include <string.h>
 using namespace std;
-// dynamic object, cons, des
-int check;
-
-class code
+class Name
 {
-    int value;
+	char *n;
+	int len;
 
 public:
-    int *a;
-    int x = 10;
-    code()
-    {
-        a = new int;
-        a = &x;
-        cout << "Object value " << *a << endl;
-    }
-
-    ~code()
-    {
-        cout << "deleting object with value " << *a << endl;
-        delete a;
-        //  cout << *a << endl;
-    }
+	Name(char studentname[]) // dynamic constructor
+	{
+		len = strlen(studentname);
+		n = new char[len + 1]; // 1) dynamically allocated in cons
+		strcpy(n, studentname);
+	}
+	void display()
+	{
+		cout << "The name of the student is " << n;
+	}
 };
 
 int main()
 {
-    code *a = new code;
+	int len;
+	char studentname[30];
+	cout << "Enter student name:";
+	cin >> studentname;
+	Name n1(studentname);
+	n1.display();
 }
