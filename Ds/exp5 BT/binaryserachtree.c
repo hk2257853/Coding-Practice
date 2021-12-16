@@ -82,8 +82,9 @@ void printlevel(struct Node *node, int lvl)
 }
 
 // edge cases (wrt root) remaining
-void deletenode(struct Node *root, int num)
+void deletenode(struct Node *node, int num)
 {
+
     // Go at required location
     struct Node *ptr = root, *prev;
     while (ptr->data != num)
@@ -109,6 +110,13 @@ void deletenode(struct Node *root, int num)
     }
     else if (ptr->left == NULL && ptr->right != NULL) // has one child
     {
+        if (ptr == root) // root is to be delted
+        {
+            root = root->right;
+            free(ptr);
+            return;
+        }
+
         if (prev->left == ptr)
             prev->left = ptr->right;
         if (prev->right == ptr)
@@ -117,6 +125,13 @@ void deletenode(struct Node *root, int num)
     }
     else if (ptr->right == NULL && ptr->left != NULL)
     {
+        if (ptr == root) // root is to be delted
+        {
+            root = ptr->left;
+            free(ptr);
+            return;
+        }
+
         if (prev->left == ptr)
             prev->left = ptr->left;
         if (prev->right == ptr)
@@ -286,31 +301,70 @@ void postorder(struct Node *node)
 
 int main()
 {
-    int arry[] = {5, 3, 11, 17, 16, 32, 4, 1};
 
-    for (int i = 0; i < sizeof(arry) / sizeof(arry[0]); i++)
+    while (1)
     {
-        add_node(arry[i]);
+        printf("0 Add elements\n");
+        printf("1 Add element\n");
+        printf("2 delete element\n");
+        printf("3 preorder traversal\n");
+        printf("4 inorder traversal\n");
+        printf("5 postorder traversal\n");
+        printf("6 search\n");
+        printf("7 printlevel\n");
+        printf("8 levelorder\n");
+        printf("9 print width\n");
+        printf("Enter from options\n");
+        int n;
+        scanf("%d", &n);
+        int x, Telements;
+
+        switch (n)
+        {
+        case 0:
+            printf("Total elements: ");
+            scanf("%d", &Telements);
+
+            for (int i = 0; i < Telements; i++)
+            {
+                scanf("%d", &x);
+                add_node(x);
+            }
+            break;
+        case 1:
+            scanf("%d", &x);
+            add_node(x);
+            break;
+        case 2:
+            scanf("%d", &x);
+            deletenode(root, x);
+            break;
+        case 3:
+            preorder(root);
+            break;
+        case 4:
+            inorder(root);
+            break;
+        case 5:
+            postorder(root);
+            break;
+        case 6:
+            search();
+            break;
+        case 7:
+            printf("Enter level to print: ");
+            int lvl;
+            scanf("%d", &lvl);
+            printlevel(root, lvl);
+            break;
+        case 8:
+            levelorder();
+            break;
+        case 9:
+            printallwidth();
+            break;
+        }
+
+        printf("\n\n");
     }
-    printallwidth();
-    printf("\n");
-    printlevel(root, 2);
-
-    //  search();
-    //   printf("preorder Transversal: ");
-    //  preorder(root);
-    //  printf("\nEnter Node to delete: ");
-    //  int num;
-    //  scanf("%d", &num);
-    //  deletenode(root, 3);
-    //  preorder(root);
-
-    // printf("\ninorder Transversal: ");
-    // inorder(root);
-
-    // printf("\npostorder Transversal: ");
-    // postorder(root);
-
-    // printf("\nLevelorder traversal: ");
-    // levelorder();
 }

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define max 6
+#define max 4
 int queue[max];
 int front = -1;
 int rear = -1;
@@ -56,9 +56,11 @@ void display()
     else
     {
         printf("Elements are: ");
-        while (i <= rear)
+        while (1)
         {
             printf("%d ", queue[i]);
+            if (i == rear)
+                break;
             i = (i + 1) % max;
         }
     }
@@ -92,6 +94,7 @@ int main()
         case 4:
             display();
         }
+        printf("\n");
     }
     return 0;
 }

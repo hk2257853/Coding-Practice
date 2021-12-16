@@ -1,0 +1,2 @@
+Dec to bin - do I need to reverse?
+LL: Plaindrome: which DS to use? Doubly?

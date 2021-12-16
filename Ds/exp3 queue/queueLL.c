@@ -13,7 +13,7 @@ struct Node *rear = NULL;
 void insert();
 void delete ();
 void Displayfront();
-void Display();
+void display();
 
 void Displayfront()
 {

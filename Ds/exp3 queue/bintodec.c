@@ -5,41 +5,48 @@
 
 struct Node
 {
-    char data;
+    int data;
     struct Node *next;
 };
+
+// Question: what methods can be used:
+// reverse queue
+// or just put in a new char array n print
 
 struct Node *front = NULL;
 struct Node *rear = NULL;
 
-void insert(char);
-char delete ();
+void insert(int);
+int delete ();
 
-void binaryToDec()
+void display() // front to rear
 {
-    char str[100];
-    printf("Enter binary number\n");
-    scanf("%s", &str);
-    int length = strlen(str);
-    for (int i = 0; i < length; i++)
+    printf("Binary number: ");
+    struct Node *temp;
+    temp = front;
+    while (temp != NULL)
     {
-        insert(str[i]);
+        printf("%d", temp->data);
+        temp = temp->next;
     }
-
-    length--;
-    int sum = 0;
-    while (front != NULL)
-    {
-        int num = (int)delete () - 48;
-        sum = sum + (num * pow(2, length));
-        length--;
-    }
-    printf("Decimal: %d\n", sum);
 }
 
-char delete ()
+void DecToBin()
 {
-    char top = front->data;
+    int inputnum;
+    printf("Enter number\n");
+    scanf("%d", &inputnum);
+    while (inputnum != 0) // till quotient isn't 0
+    {
+        insert(inputnum % 2);
+        inputnum = inputnum / 2;
+    }
+    display();
+}
+
+int delete ()
+{
+    int top = front->data;
     struct Node *temp;
     temp = front;
     front = front->next;
@@ -48,9 +55,8 @@ char delete ()
     return top;
 }
 
-void insert(char s)
+void insert(int s)
 {
-
     struct Node *NewNode = (struct Node *)malloc(sizeof(struct Node));
     NewNode->next = NULL;
     NewNode->data = s;
@@ -68,5 +74,5 @@ void insert(char s)
 
 int main()
 {
-    binaryToDec();
+    DecToBin();
 }

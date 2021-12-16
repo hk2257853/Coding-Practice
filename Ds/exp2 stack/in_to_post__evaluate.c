@@ -7,6 +7,9 @@
 
 #define SIZE 100
 
+char infix[SIZE], postfix[SIZE]; /* declare infix string and postfix string */
+// later make local
+
 /* declared here as global variable because stack[]
  * is used by more than one fucntions */
 char stack[SIZE];
@@ -154,10 +157,48 @@ void InfixToPostfix(char infix_exp[], char postfix_exp[])
                            /* will print entire postfix[] array upto SIZE */
 }
 
+void evaluatepostfix()
+{
+    // char exp[20] = stack;
+    char *e = postfix;
+    int n1, n2, n3, num;
+    // e = exp;
+    while (*e != '\0')
+    {
+        if (isdigit(*e))
+        {
+            num = *e - 48;
+            push(num);
+        }
+        else
+        {
+            n1 = pop();
+            n2 = pop();
+            switch (*e)
+            {
+            case '+':
+                n3 = n1 + n2;
+                break;
+            case '-':
+                n3 = n2 - n1;
+                break;
+            case '*':
+                n3 = n1 * n2;
+                break;
+            case '/':
+                n3 = n2 / n1;
+                break;
+            }
+            push(n3);
+        }
+        e++;
+    }
+    printf("\nThe result of expression:  %d\n\n", pop());
+}
+
 /* main function begins */
 int main()
 {
-    char infix[SIZE], postfix[SIZE]; /* declare infix string and postfix string */
 
     printf("ASSUMPTION: The infix expression contains single letter variables and single digit constants only.\n");
     printf("\nEnter Infix expression : ");
@@ -167,5 +208,6 @@ int main()
     printf("Postfix Expression: ");
     puts(postfix); /* print postfix expression */
 
+    evaluatepostfix();
     return 0;
 }
