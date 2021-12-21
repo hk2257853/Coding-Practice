@@ -4,7 +4,7 @@
 int queue[MAX];
 int front = -1, rear = -1;
 
-void insert();
+void insert(int x);
 void delete ();
 void Displayfront();
 void Display();
@@ -37,7 +37,6 @@ void delete ()
 
 void insert(int x)
 {
-
 	if (rear == -1 && front == -1)
 	{
 		rear = 0, front = 0;

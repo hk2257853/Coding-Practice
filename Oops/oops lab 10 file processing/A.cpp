@@ -7,42 +7,41 @@ int main()
     ofstream fout;
     // open():to open multiple files
 
-    fout.open("Country");
-    fout << "USA\n";
-    fout << "SK\n";
-    fout << "UK";
+    fout.open("file1.txt");
+    fout << "1\n";
+    fout << "2\n";
+    fout << "3\n";
+    fout << "4\n";
+    fout << "5\n";
     fout.close();
 
-    fout.open("Capital");
-    fout << "wash\n";
-    fout << "SKC\n";
-    fout << "London\n";
+    fout.open("file2.txt");
+    fout << "9\n";
+    fout << "8\n";
+    fout << "7\n";
     fout.close();
 
     int n = 30;
     char line[n];
 
     ifstream fin;
-
+    fout.open("file3.txt");
     fin.open("Country");
-    cout << "Content of file\n";
     while (fin)
     {
         fin.getline(line, n);
-        cout << line << endl;
+        fout << line << endl;
     }
     fin.close();
 
     fin.open("Capital");
-    cout << "Content of file 2\n";
     while (fin)
     {
         fin.getline(line, n);
-        cout << line << endl;
+        fout << line << endl;
     }
     fin.close();
+    fout.close();
 
     return 0;
 }
-
-// I can open create multiple objects of ofstream n open multiple files at once.

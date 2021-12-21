@@ -1,6 +1,6 @@
 Single object(of file classes) can work at 1 file at a time.
 
-modes:(ios class)
+modes:(ios class) pg 348 of pdf
 app, att, binary, in, nocreate, out, noreplace, 
 
 malipulate pointers:

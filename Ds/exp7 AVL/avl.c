@@ -202,6 +202,22 @@ void preorder(struct Node *node)
     preorder(node->right);
 }
 
+void displaytree(struct Node *p, int lvl)
+{
+    int i;
+    if (p == NULL)
+        return;
+
+    displaytree(p->right, lvl + 1);
+    printf("\n\n");
+    for (int i = 0; i < lvl; i++)
+    {
+        printf("\t");
+    }
+    printf("%d", p->data);
+    displaytree(p->left, lvl + 1);
+}
+
 int main()
 {
     struct Node *root = NULL;
@@ -213,6 +229,7 @@ int main()
         printf("1 Insert \n");
         printf("2 Delete \n");
         printf("3 Preorder \n");
+        printf("4 Display tree \n");
         scanf("%d", &option);
         int num, Telements;
 
@@ -241,6 +258,9 @@ int main()
         case 3:
             printf("Elements are: ");
             preorder(root);
+            break;
+        case 4:
+            displaytree(root, 0);
             break;
         }
 

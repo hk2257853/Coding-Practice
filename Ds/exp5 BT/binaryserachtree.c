@@ -254,6 +254,22 @@ void search()
         printf("not present\n");
 }
 
+void displaytree(struct Node *p, int lvl)
+{
+    int i;
+    if (p == NULL)
+        return;
+
+    displaytree(p->right, lvl + 1);
+    printf("\n\n");
+    for (int i = 0; i < lvl; i++)
+    {
+        printf("\t");
+    }
+    printf("%d", p->data);
+    displaytree(p->left, lvl + 1);
+}
+
 void levelorder()
 {
     insert_queue(root);
@@ -314,6 +330,7 @@ int main()
         printf("7 printlevel\n");
         printf("8 levelorder\n");
         printf("9 print width\n");
+        printf("10 Display tree\n");
         printf("Enter from options\n");
         int n;
         scanf("%d", &n);
@@ -362,6 +379,9 @@ int main()
             break;
         case 9:
             printallwidth();
+            break;
+        case 10:
+            displaytree(root, 0);
             break;
         }
 

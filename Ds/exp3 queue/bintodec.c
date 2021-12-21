@@ -19,29 +19,37 @@ struct Node *rear = NULL;
 void insert(int);
 int delete ();
 
-void display() // front to rear
-{
-    printf("Binary number: ");
-    struct Node *temp;
-    temp = front;
-    while (temp != NULL)
-    {
-        printf("%d", temp->data);
-        temp = temp->next;
-    }
-}
-
 void DecToBin()
 {
-    int inputnum;
+    int inputnum, size = 0;
     printf("Enter number\n");
     scanf("%d", &inputnum);
     while (inputnum != 0) // till quotient isn't 0
     {
         insert(inputnum % 2);
         inputnum = inputnum / 2;
+        size++;
     }
-    display();
+
+    char bino[100];
+    struct Node *temp;
+    temp = front;
+    int i = 0;
+    while (temp != NULL)
+    {
+        bino[i] = temp->data;
+        temp = temp->next;
+        i++;
+    }
+
+    i = size - 1;
+    while (i >= 0)
+    {
+        printf("%d", bino[i]);
+        i--;
+    }
+
+    // display();
 }
 
 int delete ()
