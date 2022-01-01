@@ -18,5 +18,8 @@ printf("%s", name);
 
 in cpp string is there so no issue
 
+string is 2d character array:
+https://overiq.com/c-programming-101/array-of-strings-in-c/
+
 
 

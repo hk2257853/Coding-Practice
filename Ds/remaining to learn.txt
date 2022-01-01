@@ -1,0 +1,1 @@
+Major stuff: 4 sorting algo, infix to post, 1 hasing
