@@ -2,6 +2,23 @@
 #include <fstream>
 #include <iomanip>
 using namespace std;
+// read from files n not arry for 3rd one
+
+void insertionSort(int arr[], int n)
+{
+	int i, key, j;
+	for (i = 1; i < n; i++)
+	{
+		key = arr[i];
+		j = i - 1;
+		while (j >= 0 && arr[j] > key)
+		{
+			arr[j + 1] = arr[j];
+			j = j - 1;
+		}
+		arr[j + 1] = key;
+	}
+}
 
 int main()
 {
@@ -17,78 +34,21 @@ int main()
 		cin >> n2[i];
 	}
 
+	// store in file 1 n 2
 	fstream file;
 	file.open("list1.txt", ios::out);
 	file.write((char *)&n1, sizeof(n1));
 	file.seekg(0, ios::beg);
 	file.close();
-
 	file.open("list2.txt", ios::out);
 	file.write((char *)&n2, sizeof(n2));
 	file.seekg(0, ios::beg);
 	file.close();
 
 	cout << "\----ndetails stored successfully in the file----\n";
-
-	for (int p = 0; p < 5; p++)
-	{
-		for (int q = p + 1; q < 5; q++)
-		{
-			if (n1[p] > n1[q])
-			{
-				temp = n1[p];
-				n1[p] = n1[q];
-				n1[q] = temp;
-			}
-		}
-	}
-	temp = 0;
-	for (int p = 0; p < 3; p++)
-	{
-		for (int q = p + 1; q < 3; q++)
-		{
-			if (n2[p] > n2[q])
-			{
-				temp = n2[p];
-				n2[p] = n2[q];
-				n2[q] = temp;
-			}
-		}
-	}
-
-	while (i < 5 && j < 3)
-	{
-		if (n1[i] <= n2[j])
-		{
-			n3[k] = n1[i];
-			k++;
-			i++;
-		}
-		else
-		{
-			n3[k] = n2[j];
-			k++;
-			j++;
-		}
-	}
-	while (i < 5)
-	{
-		n3[k] = n1[i];
-		i++;
-		k++;
-	}
-	while (j < 3)
-	{
-		n3[k] = n2[j];
-		j++;
-		k++;
-	}
-	file.open("final_list.txt", ios::out);
-	file.write((char *)&n3, sizeof n3);
-	file.close();
-
+	// display file 1 n 2
 	file.open("list1.txt", ios::in);
-	file.read((char *)&n1, sizeof(n1));
+	file.read((char *)&n1, sizeof(n1)); // array n1 will have file 1's content
 	cout << "Elements of File List 1 are: " << endl;
 	for (int i = 0; i < 5; i++)
 	{
@@ -103,6 +63,23 @@ int main()
 		cout << n2[i] << endl;
 	}
 	file.close();
+
+	// sort b4 putting in file 3
+	for (int i = 0; i < 5; i++)
+	{
+		n3[i] = n1[i];
+	}
+	for (int i = 5, j = 0; i < 8; i++, j++)
+	{
+		n3[i] = n2[j];
+	}
+	insertionSort(n3, 8);
+
+	// store n display
+	file.open("final_list.txt", ios::out);
+	file.write((char *)&n3, sizeof n3);
+	file.close();
+
 	file.open("final_list.txt", ios::in);
 	file.read((char *)&n3, sizeof(n3));
 	cout << "Elements of File Ascending are: " << endl;

@@ -2,7 +2,7 @@
 using namespace std;
 
 int main()
-{
+{ // try taking user input. Will have to reverse the char array
     char a[] = "object";
     char b[] = "tcejbo";
     int n = 6;

@@ -77,7 +77,7 @@ int main()
 		printf("2 Delete\n");
 		printf("3 Display front\n");
 		printf("4 Display\n");
-		printf("Enter from option\n");
+		printf("Enter from option: ");
 
 		int n;
 		scanf("%d", &n);

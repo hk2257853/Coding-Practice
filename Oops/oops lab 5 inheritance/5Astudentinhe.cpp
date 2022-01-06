@@ -150,11 +150,59 @@ public:
 };
 
 int main()
+// make menu. user should be able  choose which data he wants to enter
 {
-    //  creating objects of each:
     int narts, ncomp, nmech, netc, nmed;
-    cout << "Enter total students in each arts: ";
-    cin >> narts;
+
+    while (1)
+    {
+        int n;
+        cout << "1.Enter student details" << endl;
+        cout << "2.Display student details" << endl;
+        cout << "3.Search a student by roll number" << endl;
+        cout << "4.Display total number of students" << endl;
+        cin >> n;
+        switch (n)
+        {
+        case 1:
+            int num;
+            cin >> num;
+            switch (num)
+            {
+            case 1:
+
+                break;
+
+            default:
+                break;
+            }
+            cout << "Enter total students in each arts: ";
+            cin >> narts;
+            arts *a = new arts[narts];
+
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+            break;
+        case 5:
+
+            break;
+        case 6:
+
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    //  creating objects of each:
     cout << "Enter total students in each medical: ";
     cin >> nmed;
     cout << "Enter total students in each computer: ";
@@ -166,7 +214,6 @@ int main()
 
     cout << "Enter student info: " << endl;
     cout << "Arts: " << endl;
-    arts *a = new arts[narts];
     cout << "Medical: " << endl;
     medical *m = new medical[nmed];
     cout << "Computer: " << endl;
@@ -184,7 +231,7 @@ int main()
         cout << "\nEnter Name to search: ";
         cin >> inputname;
 
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < 10; i++)
         {
             if (!inputname.compare(a[i].getname()))
                 a[i].displayinfo();

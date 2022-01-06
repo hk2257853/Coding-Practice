@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-// search advantages/usesof circularLL
+
 struct Node
 {
     int data;

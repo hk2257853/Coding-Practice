@@ -30,7 +30,7 @@ int main()
     code a, b, c, d; // if I make array of objects will all get called at once? If yes DMA will be better to make objects.
     cout << "There's no more code after this so program will exit" << endl;
 
-    code a, b;
+    // code a, b;
 }
 
 // Even if I dont make the des, compiler autometically makes it. Then when actually I need des in real life.

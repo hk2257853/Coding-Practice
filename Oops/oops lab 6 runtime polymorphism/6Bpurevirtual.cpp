@@ -76,8 +76,8 @@ public:
 };
 
 int main()
-{
-	media *mptr;
+{ // TODO: try using base pointer to access data
+	// media *mptr;
 	int i;
 	int books, tapes;
 	cout << "Enter number of books:";
