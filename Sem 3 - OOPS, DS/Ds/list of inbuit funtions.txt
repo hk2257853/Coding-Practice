@@ -1,0 +1,29 @@
+Note: I often forget to pust & for scanf.
+The compiler doesn't even give error so be careful.
+
+strlen() 
+pow(a,b) a^b
+
+struct Node *NewNode = (struct Node *)malloc(sizeof(struct Node));
+			(type casting)		   (datatype not pointer)
+char a='1'
+int b=(int) a   will output 49. So do -49
+
+
+a character array is like any other array.
+So we can use a char pointer to character array and this
+will allows us to use char pointer as string.
+ie 
+char *name = "Flavio";
+printf("%s", name);
+
+strcpy(des, source)
+strcat(des, source)
+
+in cpp string is there so no issue
+
+string is 2d character array:
+https://overiq.com/c-programming-101/array-of-strings-in-c/
+
+
+
