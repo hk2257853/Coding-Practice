@@ -1,0 +1,7 @@
+memoization:
+dptable - 1D, 2D depends on changing variables (in 01 knap its index & weight)
+
+here I was having trouble with decision part... thus couldn't draw the tree...
+(understand ques properly...)
+
+

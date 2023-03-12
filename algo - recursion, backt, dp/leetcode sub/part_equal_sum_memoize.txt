@@ -1,0 +1,35 @@
+class Solution {
+public:
+    
+    bool CP(vector<int>& nums, int ind, int lsum, int rsum, vector<vector<int>> &dp)
+    {
+        // base
+        if(lsum == rsum) return true;
+        if(ind == nums.size() || rsum == 0) return false;
+        
+        if(dp[ind][rsum] != -1) return dp[ind][rsum];
+        
+        // take
+        int a = CP(nums, ind + 1, lsum + nums[ind], rsum - nums[ind], dp);
+        
+        // don't 
+        int b = CP(nums, ind + 1, lsum, rsum, dp);
+        
+        // see the 1st 2 levels. atlest one of them should return true...
+        return dp[ind][rsum] = a|| b;
+    }
+    
+    bool canPartition(vector<int>& nums) {
+        int rsum = 0;
+                        
+        for(int i = 0; i < nums.size(); i++)
+        {
+            rsum += nums[i];
+        }
+        
+        // I don't rem why we took + 1 & nums.size as size of vec properly... Just checkout properly later.
+        vector<vector<int>> dp(nums.size() + 1, vector<int> (rsum + 1, -1));
+        
+        return CP(nums, 0, 0, rsum, dp);
+    }
+};

@@ -1,0 +1,17 @@
+Was able to code on my own!!!!
+
+Mistakes:
+i++ should have put i + 1
+2d dp table... its clear why... i could have figured out... didn't think in that direction
+
+
+tabulation:
+after drawing table briefly I can code out space optimised soln
+(I am filling the same big table... jut prev & curr instance is enough... (& by going
+right to left... don't need to maintain 2 separate tables...)
+
+mistakes: indices hadling - base case taken so start from 1, should have coded 3 lines of if on my own...
+
+its easy... will get comfortable after doing 3 more...
+
+I am not sure if I'll be able to decide x & y for tabulation

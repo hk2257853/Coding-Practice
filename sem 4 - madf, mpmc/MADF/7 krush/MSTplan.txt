@@ -1,0 +1,14 @@
+union find - Potato Coders (everthing happens in array - looks easy)
+krush - luv
+prim's - logic first (simplest way)
+
+compare time complexities with other methods.
+https://cp-algorithms.com/graph/mst_prim.html#proof
+(browse in this for that)
+
+union find can only be used on undirected graphs
+applications:
+cycle detection
+
+
+prims's awesome video - https://youtu.be/lg-HC6Q7kEE

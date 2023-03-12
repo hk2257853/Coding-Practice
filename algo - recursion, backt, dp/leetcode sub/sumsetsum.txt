@@ -1,0 +1,21 @@
+// got most of the stuff. small confusion with the return part in ispresent funct (a || b). 
+
+bool ispresent(vector<int>&arr, int sum, int ind, vector< vector<int> > &lookupTable)
+    {
+        if(sum == 0) return true;
+        if(ind == arr.size()) return false;
+        if(lookupTable[ind][sum] != -1) return lookupTable[ind][sum];
+        // take
+        int a = 0;
+        if(sum >= arr[ind]) a = ispresent(arr, sum - arr[ind], ind + 1, lookupTable);
+        
+        int b = ispresent(arr, sum, ind + 1, lookupTable);
+        
+        return lookupTable[ind][sum] = a || b;
+    }
+
+    bool isSubsetSum(vector<int>arr, int sum){
+        // code here 
+        vector< vector<int> > lookupTable(arr.size(), std::vector<int>(sum + 1, -1));
+        return ispresent(arr, sum, 0, lookupTable);
+    }

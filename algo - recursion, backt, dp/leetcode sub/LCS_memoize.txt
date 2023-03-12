@@ -1,0 +1,24 @@
+class Solution {
+public:
+    
+    int lcs(string &text1, string &text2, int ind1, int ind2, vector<vector<int> > &dp)
+    {        
+        if(ind1 == text1.size() || ind2 == text2.size()) return 0;
+        if(dp[ind1][ind2] != -1) return dp[ind1][ind2];
+        // if = case. This isn't a base case!!!!!! I am including character from both!
+        if(text1[ind1] == text2[ind2]) return dp[ind1][ind2] = lcs(text1, text2, ind1 + 1, ind2 + 1, dp) + 1;
+        					// need to put this in table too
+        // take from 1st
+        int a = lcs(text1, text2, ind1 + 1, ind2, dp);
+        
+        // take from 2nd
+        int b = lcs(text1, text2, ind1, ind2 + 1, dp);
+        
+        return dp[ind1][ind2] = max(a, b);
+    }
+    
+    int longestCommonSubsequence(string text1, string text2) {
+        vector<vector<int> > dp(text1.size() + 1, vector<int>(text2.size() + 1, -1));
+        return lcs(text1, text2, 0, 0, dp);
+    }
+};

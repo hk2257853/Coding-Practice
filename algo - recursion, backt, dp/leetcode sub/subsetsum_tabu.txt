@@ -1,0 +1,38 @@
+bool isSubsetSum(vector<int>arr, int sum){
+        // code here 
+        vector<vector<int>> vec(arr.size() + 1, vector<int> (sum + 1));
+        
+        // base cases (1st column)
+        for(int i = 0; i <= arr.size(); i++)
+        {
+            vec[i][0] = 1;
+        }
+        
+        // 1st row
+        for(int i = 1; i <= sum; i++)
+        {
+            vec[0][i] = 0;
+        }
+        
+        for(int i = 1; i <= arr.size(); i++)
+        {
+            for(int j = 1; j <= sum; j++)
+            {
+                // fill the cells
+                
+                // take ith no
+                int a = 0;
+                if(j >= arr[i - 1])
+                a = vec[i - 1][j - arr[i - 1]]; // logic is: if remainder is true, then ans is true?
+                // eg: 3-2 = 1 (remainder). Check if its possible to get 1. if S, put 1 else 0
+                // don't
+                int b = vec[i - 1][j]; // prev recursive call.
+                
+                vec[i][j] = a || b;
+            }
+        }
+        
+        return vec[arr.size()][sum];
+    }
+
+// Space optimisation will be exactly like 01 ig

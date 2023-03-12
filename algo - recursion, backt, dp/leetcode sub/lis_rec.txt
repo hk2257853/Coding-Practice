@@ -1,0 +1,34 @@
+// recursive one is working... from codebix...
+
+class Solution {
+public:
+    int lis(vector<int>& nums, int ind, int prev, vector<int>& dp)
+    {
+        if(ind == nums.size()) return 0; // I write the base case after the main code... (as its the last/simplest case & depends on changing variables)
+        
+        if(dp[ind] != -1) return dp[ind];
+        
+        // include
+        int a = 0;
+        if(prev == -1 || nums[ind] > nums[prev])
+        {
+            a = 1 + lis(nums, ind + 1, ind, dp);
+        }        
+        
+        // don't
+        int b = lis(nums, ind + 1, ind, dp);
+        
+        return dp[ind] = max(a, b);
+    }
+    
+    int lengthOfLIS(vector<int>& nums) {
+        //int maxno = 
+        vector<int> dp(nums.size() + 1, 0);
+        dp[0] = 1;
+        //dp[1] = 1;
+        
+        // The dp table is wrong ig... It will be a 2D table as it depends on current ans  & index?
+        
+        return lis(nums, 1, -1, dp);
+    }
+};

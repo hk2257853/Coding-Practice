@@ -1,0 +1,34 @@
+class Solution {
+public:
+        
+    int calans(vector<int>& coins, int amount, vector<int>& dptable)
+    {
+        // base
+        if(amount == 0) return 0;        
+        
+        int ans = INT_MAX;
+        for(int i = 0; i < coins.size(); i++)
+        {                        
+            // here decision is take each one by one(OR take 1 & not others) & note take or don't take
+            if(amount - coins[i] >= 0)
+            {
+                int subans = 0;
+                if(dptable[amount - coins[i]] != -1) subans = dptable[amount - coins[i]];
+                else subans = calans(coins, amount - coins[i], dptable);                     
+                // wans't able to do this on my own:
+                if(subans != INT_MAX && subans + 1 < ans) ans = subans + 1;
+            }
+        }
+        //if(ans == INT_MAX) return dptable[amount] = -1; // why -1 not working??
+        return dptable[amount] = ans;
+    }
+        
+    int coinChange(vector<int>& coins, int amount) 
+    {
+        vector<int> dptable(amount + 1, -1);
+        dptable[0] = 0;
+        int ans = calans(coins, amount, dptable);
+        if(ans == INT_MAX) return dptable[amount] = -1;
+        return ans;
+    }
+};

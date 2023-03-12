@@ -1,0 +1,23 @@
+class Solution {
+public:
+    
+    int lcs(string &text1, string &text2, int ind1, int ind2)
+    {        
+        if(ind1 == text1.size() || ind2 == text2.size()) return 0;
+     
+        // if = case. This isn't a base case!!!!!! I am including character from both!
+        if(text1[ind1] == text2[ind2]) return lcs(text1, text2, ind1 + 1, ind2 + 1) + 1;
+        
+        // take from 1st
+        int a = lcs(text1, text2, ind1 + 1, ind2);
+        
+        // take from 2nd
+        int b = lcs(text1, text2, ind1, ind2 + 1);
+        
+        return max(a, b);
+    }
+    
+    int longestCommonSubsequence(string text1, string text2) {
+        return lcs(text1, text2, 0, 0);
+    }
+};

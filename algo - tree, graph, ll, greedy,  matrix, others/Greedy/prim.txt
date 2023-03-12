@@ -1,0 +1,3 @@
+// There r too many implementations (stack, queue, some weird stuff...)
+// For now: I'll just understand the approach... thus understanding the greedy method.
+// Later when I get the notes next month, I can try coding...

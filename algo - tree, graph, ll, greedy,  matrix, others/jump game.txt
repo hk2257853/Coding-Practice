@@ -1,0 +1,6 @@
+i:
+can jump to end... really easy... its intuitive that starting from end
+will do the job...
+
+ii:
+I am using dp for now... but O(n) greedy do exist (will check later)

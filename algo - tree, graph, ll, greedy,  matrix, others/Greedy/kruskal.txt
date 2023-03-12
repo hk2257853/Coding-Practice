@@ -1,0 +1,3 @@
+the concept/approach is simple. But implementations r a little weird n different at different.
+
+So just understand the greedy approach. I'll code once I have the college notes.

@@ -1,0 +1,2 @@
+dp with a single state
+https://leetcode.com/problems/longest-substring-of-one-repeating-character/

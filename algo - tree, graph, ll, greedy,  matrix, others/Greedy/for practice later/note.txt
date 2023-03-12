@@ -1,0 +1,3 @@
+I looked at code and wrote...
+
+I am preparing the ques so that I can just code the actual soln later(like leetcode)
