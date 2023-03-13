@@ -2,3 +2,4 @@
 .vscode/
 .cph/
 tempCodeRunnerFile.c
+*.bin
