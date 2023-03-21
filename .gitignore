@@ -3,3 +3,4 @@
 .cph/
 tempCodeRunnerFile.c
 *.bin
+*.o

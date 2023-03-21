@@ -46,7 +46,7 @@ int height(struct Node *node)
     return 1 + maxnum(left, right);
 }
 
-int printwidth(struct Node *node, int lvl) // its just level order traversal n counting 
+int printwidth(struct Node *node, int lvl) // its just level order traversal n counting
 {                                          // This is pretty good. I was trying to get width like height now... just needed lvl order actually (like I did for the 1st time)
     if (node == NULL)
         return 0;
@@ -70,7 +70,12 @@ void printallwidth()
     }
 }
 
-void printlevel(struct Node *node, int lvl)
+/*
+ 1
+2 3
+tree of this size is better when writing the recursive equation
+*/
+void printlevel(struct Node *node, int lvl) // this is ok if I want to print a particular lvl - O(n) TC
 {
     if (node == NULL)
         return;
@@ -81,6 +86,7 @@ void printlevel(struct Node *node, int lvl)
     printlevel(node->right, lvl - 1);
 }
 
+// udemy Pedro has best explaination
 // edge cases (wrt root) remaining
 void deletenode(struct Node *node, int num)
 {
@@ -138,7 +144,7 @@ void deletenode(struct Node *node, int num)
             prev->right = ptr->left;
         free(ptr);
     }
-    else if (ptr->left != NULL && ptr->right != NULL) // 2 child
+    else if (ptr->left != NULL && ptr->right != NULL) // 2 child. put todelnode->val = max in lst or min in rst, then just del the no I equated it to (equate after del, c line 149)
     {
         struct Node *minptr = ptr->right;
         while (minptr->left != NULL)
@@ -272,7 +278,11 @@ void displaytree(struct Node *p, int lvl)
 
 void levelorder()
 {
-    insert_queue(root);
+    // if I want to print level wise, put a null at the end of each level.
+    // If I encounter a null, I will print a new line and again put a null at the end of the queue.
+    // Do not insert null child
+
+    insert_queue(root); // also put a null after this (for above)
 
     while (front <= rear)
     {
@@ -304,6 +314,7 @@ void inorder(struct Node *node)
     printf("%d ", node->data);
     inorder(node->right);
 }
+// inorder successor - 2 3 6 7 10 (inorder for bst is sorted), IS of 3 is 6, IS of 7 is 10 (don't use for del, just know)
 
 void postorder(struct Node *node)
 {
