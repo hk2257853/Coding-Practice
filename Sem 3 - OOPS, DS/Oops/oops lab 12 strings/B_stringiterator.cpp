@@ -3,12 +3,16 @@ using namespace std;
 
 void display(string sec)
 {
-    string::iterator it;
+    // string::iterator it;
     cout << "The string is: ";
-    for (it = sec.begin(); it != sec.end(); it++)
+    for (auto &x : sec)
     {
-        cout << *it;
+        cout << x;
     }
+    // for (it = sec.begin(); it != sec.end(); it++)
+    // {
+    //     cout << *it;
+    // }
     cout << endl;
 }
 int main()

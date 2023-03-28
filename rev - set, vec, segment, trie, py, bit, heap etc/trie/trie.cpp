@@ -1,5 +1,6 @@
 // concept: neetcode
 // code: apna college
+// remember the concept, I'll be able to code.
 
 #include "iostream"
 using namespace std;
@@ -17,44 +18,43 @@ public:
         end = false;
         for (int i = 0; i < 26; i++)
         {
-            next[i] = NULL; 
+            next[i] = NULL;
         }
-        
     }
 };
-
 
 class Trie
 {
 public:
     node *trie;
-    Trie(){
+    Trie()
+    {
         trie = new node(); // this will be the root node
     }
 
-    void insert(string word){
+    void insert(string word)
+    {
         node *it = trie;
-        for(int i = 0; i < word.size(); i++)
+        for (int i = 0; i < word.size(); i++)
         {
-            if(it->next[word[i] - 'a'] == NULL) it->next[word[i] - 'a'] = new node(); // if no match at current node, make a new node
+            if (it->next[word[i] - 'a'] == NULL)
+                it->next[word[i] - 'a'] = new node(); // if no match at current node, make a new node
             it = it->next[word[i] - 'a'];
-
         }
         it->end = true;
     }
-    
+
     bool search(string word)
     {
         node *it = trie;
         for (int i = 0; i < word.size(); i++) // logic: just keeptraversing while the character matches...
         {
-            if(it -> next[word[i] - 'a'] == NULL) return false;
+            if (it->next[word[i] - 'a'] == NULL)
+                return false;
             it = it->next[word[i] - 'a'];
         }
         return it->end; // end needs to be true...
     }
-
-
 };
 
 int main()
@@ -66,22 +66,14 @@ int main()
         myTrie->insert(words[i]);
     }
 
-    if(myTrie->search("heloo")) cout << "YES" << endl;
-    else cout << "No" << endl;
+    if (myTrie->search("heloo"))
+        cout << "YES" << endl;
+    else
+        cout << "No" << endl;
 
     // EXTRA:
     // cout << 'c' - 'a' << endl;
     // TODO: learn about ascii n characters properly
-
-    // vector<string> arr = {"acd", "acb", "zabcdef", "ac", "adbc"};
-    // sort(arr.begin(), arr.end());
-    // for (int i = 0; i < arr.size(); i++)
-    // {
-    //     cout << arr[i] << " ";
-    // }
-    // OP: ac acb acd adbc zabcdef
-    
-
 }
 
 /*

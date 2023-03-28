@@ -1,2 +1,2 @@
-For input, the strings get ignored if I put a 
-space in between.
+For input, the strings get ignored if I put a space in between.
+so use this: getline(cin, str);

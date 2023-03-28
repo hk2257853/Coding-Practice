@@ -4,6 +4,7 @@ using namespace std;
 class calc
 {
 public:
+    // call by reference: it will not create a copy of the variable. It will directly use the variable.
     int sum(int &x, int &y)
     {
         return x + y;

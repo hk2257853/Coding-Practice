@@ -1,6 +1,7 @@
 #include "iostream"
 using namespace std;
 
+// I wanna do a++ where a is an object of class unary. (internally I'll increment the value of variables, like here x, by 1)
 class unary
 {
 private:
@@ -20,11 +21,10 @@ public:
         return temp;
     }
 
-    unary operator++(int) // after putting int as paramenter it worked!! understand this topic further
+    // for post increment, pass int
+    void operator++(int) // after putting int as paramenter it worked!! understand this topic further
     {
-        unary temp;
-        temp.x = x++;
-        return temp;
+        this->x++; // works too
     }
 
     unary operator--()

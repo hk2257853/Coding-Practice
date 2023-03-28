@@ -10,7 +10,7 @@ int main()
 	int r = s1.compare(s2);
 	cout << "\nresult : " << r;
 	cout << "\n----------------------------------";
-	if (s1 == s2)
+	if (s1 == s2) // use this for string comparison!!
 		cout << "\nsame";
 	else if (s1 > s2)
 		cout << "\ns1 greater:";

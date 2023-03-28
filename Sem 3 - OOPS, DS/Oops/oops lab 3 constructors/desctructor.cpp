@@ -27,12 +27,9 @@ public:
 
 int main()
 {
-    code a, b, c, d; // if I make array of objects will all get called at once? If yes DMA will be better to make objects.
+    code a, b, c, d; // curious ques: if I make array of objects will all get called at once? If yes DMA will be better to make objects.
     cout << "There's no more code after this so program will exit" << endl;
-
-    // code a, b;
 }
 
-// Even if I dont make the des, compiler autometically makes it. Then when actually I need des in real life.
-//  This is the only ques. Don't search anything else.
-
+// Even if I dont make the des, compiler autometically makes it.
+// need to use destructor only in cases like DMA.

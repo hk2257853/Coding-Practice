@@ -10,7 +10,7 @@ public:
 	Name(char studentname[]) // dynamic constructor
 	{
 		len = strlen(studentname);
-		n = new char[len + 1]; // 1) dynamically allocated in cons
+		n = new char[len + 1]; // dynamically allocated in cons
 		strcpy(n, studentname);
 	}
 	void display()

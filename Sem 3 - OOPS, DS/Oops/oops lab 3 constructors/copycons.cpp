@@ -3,29 +3,29 @@ using namespace std;
 
 class code
 {
-    private:
+private:
     int x;
 
-    public:
+public:
     code(int a)
     {
-    x=a;
+        x = a;
     }
 
-    code(code &ob)
+    code(code &ob) // copy constructor: takes object as argument and copies it.
     {
-    x=ob.x;
+        x = ob.x;
     }
     void display()
     {
-    cout<<x<<endl;
+        cout << x << endl;
     }
 };
 
 int main()
 {
     code A(10);
-    code B(A);
+    code B(A); // B is a copy of A
 
     A.display();
     B.display();

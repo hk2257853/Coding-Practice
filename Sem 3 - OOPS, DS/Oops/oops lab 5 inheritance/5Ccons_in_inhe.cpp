@@ -30,7 +30,7 @@ public:
 		cout << "\ny = " << y;
 	}
 };
-class gamma : public beta, public alpha
+class gamma : public beta, public alpha // which parent's cons will be called 1st depends on the order of inheritance
 {
 	int m, n;
 

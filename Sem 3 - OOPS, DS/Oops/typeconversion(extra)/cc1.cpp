@@ -1,14 +1,12 @@
 #include "iostream"
 using namespace std;
 
-//using constructor
-
-//Since I didn't write this it was giving me an error. class minute needs sec's object
-//program doesn't work if I forward declare a class.
+// using constructor
+// program doesn't work if I forward declare a class. forward declare means I declare a class but don't define it.
 
 class sec
 {
-    int secs = 60; //hardcoding for testing.
+    int secs = 60; // hardcoding for testing.
 
 public:
     int returnsec()
@@ -23,9 +21,9 @@ class minute
 
 public:
     minute() {}
-    minute(sec &a)
+    minute(sec &a) // need to pass by reference
     {
-        min = a.returnsec() * 60; //I tried to do using friend but didn't work
+        min = a.returnsec() * 60; // I tried to do using friend but didn't work
     }
 
     void display()

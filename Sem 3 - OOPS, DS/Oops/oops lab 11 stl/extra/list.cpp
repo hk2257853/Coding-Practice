@@ -6,12 +6,18 @@ using namespace std;
 
 void display(list<int> lst)
 {
-    list<int>::iterator it;
+    // list<int>::iterator it;
     cout << "The elements are: ";
-    for (it = lst.begin(); it != lst.end(); it++)
+    // for (it = lst.begin(); it != lst.end(); it++)
+    // {
+    //     cout << *it << " ";
+    // }
+
+    for (auto &x : lst) // easier
     {
-        cout << *it << " ";
+        cout << x << " ";
     }
+
     cout << endl;
 }
 

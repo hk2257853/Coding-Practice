@@ -29,7 +29,7 @@ public:
             sum = sum + marks[i];
         }
         cout << "percentage:\n"
-             << sum / 5 << "\n"; //assuming 500 is total marks
+             << sum / 5 << "\n"; // assuming 500 is total marks
     }
 };
 Student *a;
@@ -78,7 +78,7 @@ int main()
     int TStudents;
     cout << "Enter total students:\n";
     cin >> TStudents;
-    a = new Student[TStudents]; //DMA
+    a = new Student[TStudents]; // DMA
 
     for (int i = 0; i < TStudents; i++)
     {
@@ -89,7 +89,7 @@ int main()
     {
         a[i].printdata();
     }
-    delete a; //deleting a
+    delete a; // deleting a
 
     // had to make printdata function part of class. Otherwise was priting garbage values.
 

@@ -18,7 +18,7 @@ int main()
     prefixsum.push_back(vec[0]);
     for (int i = 1; i < n; i++)
     {
-        prefixsum.push_back(vec[i]+prefixsum[i-1]);
+        prefixsum.push_back(vec[i] + prefixsum[i - 1]);
     }
 
     // output
@@ -27,17 +27,17 @@ int main()
         cout << prefixsum[i] << " ";
     }
     cout << endl;
-    
-    
-    
+
     for (int i = 0; i < n; i++)
     {
         for (int j = i; j < n; j++)
         {
             // prefix sum eliminates the need to traverse from i to j
             int sum;
-            if(i > 0) sum = prefixsum[j] - prefixsum[i-1]; // this is like using geometry
-            else sum = prefixsum[j];
+            if (i > 0)
+                sum = prefixsum[j] - prefixsum[i - 1]; // this is like using geometry
+            else
+                sum = prefixsum[j];
 
             cout << sum << endl;
         }
@@ -46,3 +46,5 @@ int main()
 
     // same ans as I did in subarray! good work boi!!
 }
+
+// time complexity: O(n2)

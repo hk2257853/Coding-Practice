@@ -1,6 +1,7 @@
 #include "iostream"
 using namespace std;
 
+// also called implicit conversion. implicit means it happens automatically.
 class minute
 {
     int min;
@@ -22,7 +23,7 @@ int main()
 {
     minute time;
     int timesec = 60;
-    time = timesec;
+    time = timesec; // Constructor is called.
     time.display();
     return 0;
 }

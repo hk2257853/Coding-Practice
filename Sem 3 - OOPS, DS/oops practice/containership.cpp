@@ -1,6 +1,8 @@
 #include "iostream"
 using namespace std;
 
+// containership: class A is a member of class B
+
 class A
 {
 

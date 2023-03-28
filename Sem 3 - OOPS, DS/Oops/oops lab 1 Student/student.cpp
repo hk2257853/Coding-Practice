@@ -3,6 +3,7 @@ using namespace std;
 
 class Student
 {
+    // default is private
     int Rollno;
     string Name, Department, address;
     int marks[5];
@@ -29,11 +30,12 @@ public:
             sum = sum + marks[i];
         }
         cout << "percentage:\n"
-             << sum / 5 << "\n"; //assuming 500 is total marks
+             << sum / 5 << "\n"; // assuming 500 is total marks
     }
 };
-Student a[5];
+Student a[5]; // object array
 
+// funtion declared in the class, defined outside the class
 void Student::getdata(int RollNO, string name, string Dept, string adrs, int data[5])
 {
     Rollno = RollNO;
@@ -84,8 +86,6 @@ int main()
     {
         a[i].printdata();
     }
-
-    // had to make printdata function part of class. Otherwise was priting garbage values.
 
     return 0;
 }

@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+// function overloading: same function name but different parameters.
 class calc
 {
 private:
