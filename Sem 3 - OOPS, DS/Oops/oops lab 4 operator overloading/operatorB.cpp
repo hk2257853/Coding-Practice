@@ -22,6 +22,7 @@ public:
         return temp;
     }
 
+    // if we have inbuilt type and class, we use friend (chat gpt: allows you to access the private members of the num class from the non-member function operator+)
     friend num operator+(int c1, num &c2) // if I write  int &c1, it gives error
     {
         num temp;

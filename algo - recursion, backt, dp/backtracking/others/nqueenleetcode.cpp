@@ -12,6 +12,8 @@ private:
             res.push_back(nQueens);
             return;
         }
+        
+        // NOTE: I saw nothing is covering up for col+1 part. 2 options: recurion fun or for loop. 
         for (int col = 0; col != n; ++col)
             if (isValid(nQueens, row, col, n)) {
                 nQueens[row][col] = 'Q';
