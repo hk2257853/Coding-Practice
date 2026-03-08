@@ -10,7 +10,7 @@ Topics covered:
 5. Stack operations
 6. Queue operations
 7. Priority Queue operations
-8. Prefix Sum
+8. Prefix Sum and variations (suffix sum, max prefix, difference array, difference array for range updates etc)
 9. Maths (GCD, LCM)
 10. Graph representation using adjacency list
 11. DFS and BFS
@@ -156,14 +156,14 @@ int main()
     reverse(str.begin(), str.end()); // Reverse string
 
     // stack operations
-    stack<int> stk;
+    stack<int> stk;             // LIFO - last in first out
     stk.push(1);                // Push element
     int top = stk.top();        // Access top element
     stk.pop();                  // Pop element
     bool isEmpty = stk.empty(); // Check if stack is empty
 
     // queue operations
-    queue<int> q;
+    queue<int> q;              // FIFO - first in first out
     q.push(1);                 // inserted from read
     int front = q.front();     // Access front element
     q.pop();                   // remove front element
@@ -200,7 +200,19 @@ int main()
         prefixSum[i] = prefixSum[i - 1] + vec[i];
     }
     // NOTE: a lot of variations possible depending on the problem
-    // eg: suffix sum, max prefix, difference array,
+    // eg: suffix sum, max prefix, difference array
+    // array = {5, 3, 8, 2, 7}
+    // prefixSum = {5, 8, 16, 18, 25}
+    // suffixSum = {25, 20, 17, 9, 7}
+    // maxPrefix = {5, 5, 8, 8, 8}
+    // diff = {5, -2, 5, -6, 5}
+
+    // difference array - to perform range updates efficiently.
+    // array = {1, 2, 3, 4, 5}. from index 1 to 3, add 2
+    // diff = {0, 2, 0, 0, -2} -> add 2 at index 1 and subtract 2 at index 3+1=4
+    // take prefix sum - {0, 2, 2, 2, 0} -> add this to original array to get updated array {1, 4, 5, 6, 5}
+    // last index is edge case (no need of -ve in that case).
+    // similar stuff can be done with xor array for range xor updates
 
     // maths
     int a = 10, b = 15;
@@ -208,6 +220,7 @@ int main()
     // gcd of more than 2 numbers
     int gcd_val2 = __gcd(gcd_val, 20); // GCD of a, b, and 20
     int lcm_val = (a * b) / gcd_val;   // LCM of a and b - lowest number divisible by both: 30
+    // gcd - greatest common divisor, lcm - least common multiple
 
     // formulas
     /*
@@ -217,6 +230,9 @@ int main()
 
     |a-b| = k
     -> a + b = +k or a + b = -k
+
+    no of subarrays - n(n+1)/2
+    no of sub sequences - 2^n (each element can be included or excluded)
 
     */
 
