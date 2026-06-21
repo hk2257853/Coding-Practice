@@ -117,6 +117,8 @@ public class CheatSheet {
         }
 
         // ArrayList of Pairs
+        // Pair is a custom class here not inbuilt  - for now ignore.
+        /*
         List<Pair<Integer, Integer>> vecPair = new ArrayList<>();
         vecPair.add(new Pair<>(1, 2));
         vecPair.add(new Pair<>(3, 4));
@@ -132,11 +134,14 @@ public class CheatSheet {
         
         // Sort strictly by second element
         vecPair.sort(Comparator.comparingInt(a -> a.second));
+        */
 
         // Binary search (returns >= 0 if found, -(insertion point) - 1 if not)
         Collections.sort(vec); // Must be sorted first
         boolean found = Collections.binarySearch(vec, 3) >= 0;
 
+        // NOTE: these are custom implementations of lower_bound and upper_bound and not inbuilt, ignore for now.
+        /*
         // lower_bound and upper_bound
         List<Integer> v = new ArrayList<>(Arrays.asList(1, 2, 2, 2, 3));
         
@@ -157,6 +162,7 @@ public class CheatSheet {
             System.out.println("4 not found, position is at the end");
         }
 
+        
         // <= x ? -> upper_bound(x) - 1
         int ub3 = upperBound(v, 2);
         System.out.println(v.get(ub3 - 1)); // output - 2 (value)
@@ -164,6 +170,7 @@ public class CheatSheet {
         // < x ? -> lower_bound(x) - 1
         int lb3 = lowerBound(v, 2);
         System.out.println(lb3 - 1); // output - 0 (index)
+        */
 
 
         // 2. HashSet (Set) operations
