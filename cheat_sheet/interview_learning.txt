@@ -1,0 +1,9 @@
+⚡ Quick Fixes
+Analyze Examples First: Inspect provided test cases carefully upfront to catch edge cases early.
+Act on Interviewer Hints: Avoid overthinking—start coding when directed rather than trying to figure everything out first.
+Respect Problem Constraints: Stick strictly to given constraints during explanations to avoid confusing the interviewer.
+
+🎯 Quality Improvements
+Master Standard Algorithms (BFS, DFS, Dijkstra): Practice common algorithms until code execution is flawless, avoiding the need to derive them on the spot.
+Deepen Traversal Concepts: Build clear conceptual visualization of graph/traversal algorithms (understanding path, edge, vs. vertex traversal semantics).
+Strengthen Logic Construction & Unfamiliar Categories: Practice logic building and expand mastery into previously unfamiliar problem categories.

@@ -9,6 +9,7 @@ Topics covered:
 4. Cycle Detection in Directed Graph using DFS
 5. Cycle Detection in Undirected Graph using DFS
 6. Topological Sort using DFS
+7. Find All Paths from Source to Target using DFS
 */
 
 // dfs
@@ -230,6 +231,42 @@ void printTopologicalOrder(int n, const vector<vector<int>> &adjList)
     cout << endl;
 }
 
+// find all paths from source to target using DFS (backtracking)
+void findAllPathsDFS(int u, int target, vector<bool> &visited, vector<int> &currentPath, vector<vector<int>> &allPaths, const vector<vector<int>> &adjList)
+{
+    visited[u] = true;
+    currentPath.push_back(u);
+
+    if (u == target)
+    {
+        allPaths.push_back(currentPath);
+    }
+    else
+    {
+        for (int neighbor : adjList[u])
+        {
+            if (!visited[neighbor])
+            {
+                findAllPathsDFS(neighbor, target, visited, currentPath, allPaths, adjList);
+            }
+        }
+    }
+
+    // backtrack
+    currentPath.pop_back();
+    visited[u] = false;
+}
+
+// helper wrapper to get all paths from src to target
+vector<vector<int>> getAllPaths(int src, int target, int n, const vector<vector<int>> &adjList)
+{
+    vector<bool> visited(n, false);
+    vector<int> currentPath;
+    vector<vector<int>> allPaths;
+    findAllPathsDFS(src, target, visited, currentPath, allPaths, adjList);
+    return allPaths;
+}
+
 int main()
 {
     // graph representation using adjacency list (DAG in this case)
@@ -266,6 +303,18 @@ int main()
     // Topological sorting
     cout << "Topological Order: ";
     printTopologicalOrder(n, adjList);
+
+    // All paths from source to target using DFS
+    cout << "All paths from node 0 to 3 using DFS:" << endl;
+    vector<vector<int>> paths = getAllPaths(0, 3, n, adjList);
+    for (const auto &path : paths)
+    {
+        for (int node : path)
+        {
+            cout << node << " ";
+        }
+        cout << endl;
+    }
 
     // Undirected graph cycle detection demo
     vector<vector<int>> undirectedAdjList(n);
