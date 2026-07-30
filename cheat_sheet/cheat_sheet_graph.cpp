@@ -13,25 +13,25 @@ Topics covered:
 */
 
 // dfs
-void dfs(int node, vector<bool> &visited, const vector<vector<int>> &adjList)
+void dfs(vector<vector<int>> &graph, int node, vector<bool> &isVisited)
 {
-    visited[node] = true;
-    cout << node << " ";
-    for (int neighbor : adjList[node])
+    cout << node << " ";               // print
+    isVisited[node] = true;            // mark
+    for (int neighbor : graph[node]) // for neigh
     {
-        if (!visited[neighbor])
+        if (!isVisited[neighbor]) // !vis
         {
-            dfs(neighbor, visited, adjList);
+            dfs(graph, neighbor, isVisited); // dfs
         }
     }
 }
 
 // bfs
-void bfs(int startNode, const vector<vector<int>> &adjList)
+void bfs(vector<vector<int>> &graph, int startNode)
 {
-    vector<bool> visited(adjList.size(), false);
+    vector<bool> isVisited(graph.size(), false);
     queue<int> q;
-    visited[startNode] = true;
+    isVisited[startNode] = true;
     q.push(startNode);
 
     while (!q.empty())
@@ -40,11 +40,11 @@ void bfs(int startNode, const vector<vector<int>> &adjList)
         q.pop();
         cout << node << " ";
 
-        for (int neighbor : adjList[node])
+        for (int neighbor : graph[node])
         {
-            if (!visited[neighbor])
+            if (!isVisited[neighbor])
             {
-                visited[neighbor] = true;
+                isVisited[neighbor] = true;
                 q.push(neighbor);
             }
         }
@@ -52,25 +52,29 @@ void bfs(int startNode, const vector<vector<int>> &adjList)
 }
 
 // bfs with levels
-void bfs_with_level(int startNode, const vector<vector<int>> &adjList)
+void bfs_with_level(vector<vector<int>> &graph, int startNode)
 {
-    vector<bool> visited(adjList.size(), false);
+    vector<bool> isVisited(graph.size(), false);
     queue<int> q;
-    visited[startNode] = true;
+    isVisited[startNode] = true;
     q.push(startNode);
     int level = 0;
 
-    while (!q.empty()) {
-        int size = q.size();  // nodes at current level
+    while (!q.empty())
+    {
+        int size = q.size(); // nodes at current level
 
-        while(size--) {
+        while (size--)
+        {
             int node = q.front();
             q.pop();
             cout << "Level " << level << ": " << node << " ";
 
-            for (int neighbor : adjList[node]) {
-                if (!visited[neighbor]) {
-                    visited[neighbor] = true;
+            for (int neighbor : graph[node])
+            {
+                if (!isVisited[neighbor])
+                {
+                    isVisited[neighbor] = true;
                     q.push(neighbor);
                 }
             }
@@ -86,12 +90,12 @@ void bfs_with_level(int startNode, const vector<vector<int>> &adjList)
 // in the breadth pick pick up the smallest element and cal dist.
 
 // Mistakes done while implementing:
-// 1) confused at pq.push({dist[neighbor], neighbor}); 
+// 1) confused at pq.push({dist[neighbor], neighbor});
 // 2) if (d > dist[u]) continue; missing
-// 3) do int d = pq.top().first and for (const auto &edge : adjList[u]) instead of indices to avoid mess/confusion.
-vector<int> dijkstra(int startNode, int n, const vector<vector<pair<int, int>>> &adjList)
+// 3) do int d = pq.top().first and for (const auto &edge : graph[u]) instead of indices to avoid mess/confusion.
+vector<int> dijkstra(vector<vector<pair<int, int>>> &graph, int startNode, int n)
 {
-    vector<int> dist(n, 1e9); // 1e9 represents infinity
+    vector<int> dist(n, 1e9);                                                           // 1e9 represents infinity
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; // {distance, node}
 
     dist[startNode] = 0;
@@ -103,9 +107,10 @@ vector<int> dijkstra(int startNode, int n, const vector<vector<pair<int, int>>> 
         int u = pq.top().second;
         pq.pop();
 
-        if (d > dist[u]) continue;         // stale data
+        if (d > dist[u])
+            continue; // stale data
 
-        for (const auto &edge : adjList[u])
+        for (const auto &edge : graph[u])
         {
             int neighbor = edge.first;
             int weight = edge.second;
@@ -121,16 +126,16 @@ vector<int> dijkstra(int startNode, int n, const vector<vector<pair<int, int>>> 
 }
 
 // cycle detection in a directed graph using DFS (returns true if cycle exists)
-bool detectCycleDFS(int node, vector<bool> &visited, vector<bool> &inStack, const vector<vector<int>> &adjList)
+bool detectCycleDFS(vector<vector<int>> &graph, int node, vector<bool> &isVisited, vector<bool> &inStack)
 {
-    visited[node] = true;
+    isVisited[node] = true;
     inStack[node] = true;
 
-    for (int neighbor : adjList[node])
+    for (int neighbor : graph[node])
     {
-        if (!visited[neighbor])
+        if (!isVisited[neighbor])
         {
-            if (detectCycleDFS(neighbor, visited, inStack, adjList))
+            if (detectCycleDFS(graph, neighbor, isVisited, inStack))
                 return true;
         }
         else if (inStack[neighbor])
@@ -144,15 +149,15 @@ bool detectCycleDFS(int node, vector<bool> &visited, vector<bool> &inStack, cons
 }
 
 // helper wrapper for cycle detection across all components
-bool hasCycle(int n, const vector<vector<int>> &adjList)
+bool hasCycle(vector<vector<int>> &graph, int n)
 {
-    vector<bool> visited(n, false);
+    vector<bool> isVisited(n, false);
     vector<bool> inStack(n, false);
     for (int i = 0; i < n; i++) // as it's a directed disconnected graph
     {
-        if (!visited[i])
+        if (!isVisited[i])
         {
-            if (detectCycleDFS(i, visited, inStack, adjList))
+            if (detectCycleDFS(graph, i, isVisited, inStack))
                 return true;
         }
     }
@@ -160,16 +165,16 @@ bool hasCycle(int n, const vector<vector<int>> &adjList)
 }
 
 // cycle detection in an undirected graph using DFS (returns true if cycle exists)
-// core idea is it's already visited and not parent 
-bool detectCycleUndirectedDFS(int node, int parent, vector<bool> &visited, const vector<vector<int>> &adjList)
+// core idea is it's already visited and not parent
+bool detectCycleUndirectedDFS(vector<vector<int>> &graph, int node, int parent, vector<bool> &isVisited)
 {
-    visited[node] = true;
+    isVisited[node] = true;
 
-    for (int neighbor : adjList[node])
+    for (int neighbor : graph[node])
     {
-        if (!visited[neighbor])
+        if (!isVisited[neighbor])
         {
-            if (detectCycleUndirectedDFS(neighbor, node, visited, adjList))
+            if (detectCycleUndirectedDFS(graph, neighbor, node, isVisited))
                 return true;
         }
         else if (neighbor != parent)
@@ -182,14 +187,14 @@ bool detectCycleUndirectedDFS(int node, int parent, vector<bool> &visited, const
 }
 
 // helper wrapper for cycle detection across all components of an undirected graph
-bool hasCycleUndirected(int n, const vector<vector<int>> &adjList)
+bool hasCycleUndirected(vector<vector<int>> &graph, int n)
 {
-    vector<bool> visited(n, false);
+    vector<bool> isVisited(n, false);
     for (int i = 0; i < n; i++) // as it's an undirected disconnected graph
     {
-        if (!visited[i])
+        if (!isVisited[i])
         {
-            if (detectCycleUndirectedDFS(i, -1, visited, adjList))
+            if (detectCycleUndirectedDFS(graph, i, -1, isVisited))
                 return true;
         }
     }
@@ -197,29 +202,29 @@ bool hasCycleUndirected(int n, const vector<vector<int>> &adjList)
 }
 
 // topological sort DFS helper
-void topoSortDFS(int node, vector<bool> &visited, stack<int> &stk, const vector<vector<int>> &adjList)
+void topoSortDFS(vector<vector<int>> &graph, int node, vector<bool> &isVisited, stack<int> &stk)
 {
-    visited[node] = true;
-    for (int neighbor : adjList[node])
+    isVisited[node] = true;
+    for (int neighbor : graph[node])
     {
-        if (!visited[neighbor])
+        if (!isVisited[neighbor])
         {
-            topoSortDFS(neighbor, visited, stk, adjList);
+            topoSortDFS(graph, neighbor, isVisited, stk);
         }
     }
     stk.push(node);
 }
 
 // prints topological order
-void printTopologicalOrder(int n, const vector<vector<int>> &adjList)
+void printTopologicalOrder(vector<vector<int>> &graph, int n)
 {
-    vector<bool> visited(n, false);
+    vector<bool> isVisited(n, false);
     stack<int> stk;
     for (int i = 0; i < n; i++)
     {
-        if (!visited[i])
+        if (!isVisited[i])
         {
-            topoSortDFS(i, visited, stk, adjList);
+            topoSortDFS(graph, i, isVisited, stk);
         }
     }
 
@@ -232,9 +237,9 @@ void printTopologicalOrder(int n, const vector<vector<int>> &adjList)
 }
 
 // find all paths from source to target using DFS (backtracking)
-void findAllPathsDFS(int u, int target, vector<bool> &visited, vector<int> &currentPath, vector<vector<int>> &allPaths, const vector<vector<int>> &adjList)
+void findAllPathsDFS(vector<vector<int>> &graph, int u, int target, vector<bool> &isVisited, vector<int> &currentPath, vector<vector<int>> &allPaths)
 {
-    visited[u] = true;
+    isVisited[u] = true;
     currentPath.push_back(u);
 
     if (u == target)
@@ -243,27 +248,27 @@ void findAllPathsDFS(int u, int target, vector<bool> &visited, vector<int> &curr
     }
     else
     {
-        for (int neighbor : adjList[u])
+        for (int neighbor : graph[u])
         {
-            if (!visited[neighbor])
+            if (!isVisited[neighbor])
             {
-                findAllPathsDFS(neighbor, target, visited, currentPath, allPaths, adjList);
+                findAllPathsDFS(graph, neighbor, target, isVisited, currentPath, allPaths);
             }
         }
     }
 
     // backtrack
     currentPath.pop_back();
-    visited[u] = false;
+    isVisited[u] = false;
 }
 
 // helper wrapper to get all paths from src to target
-vector<vector<int>> getAllPaths(int src, int target, int n, const vector<vector<int>> &adjList)
+vector<vector<int>> getAllPaths(vector<vector<int>> &graph, int src, int target, int n)
 {
-    vector<bool> visited(n, false);
+    vector<bool> isVisited(n, false);
     vector<int> currentPath;
     vector<vector<int>> allPaths;
-    findAllPathsDFS(src, target, visited, currentPath, allPaths, adjList);
+    findAllPathsDFS(graph, src, target, isVisited, currentPath, allPaths);
     return allPaths;
 }
 
@@ -288,25 +293,25 @@ int main()
         cout << endl;
     }
 
-    vector<bool> visited(n, false);
+    vector<bool> isVisited(n, false);
     cout << "DFS starting from node 0: ";
-    dfs(0, visited, adjList); // DFS starting from node 0
+    dfs(adjList, 0, isVisited); // DFS starting from node 0
     cout << endl;
-    
+
     cout << "BFS starting from node 0: ";
-    bfs(0, adjList); // BFS starting from node 0
+    bfs(adjList, 0); // BFS starting from node 0
     cout << endl;
 
     // Cycle detection
-    cout << "Has cycle: " << (hasCycle(n, adjList) ? "Yes" : "No") << endl;
+    cout << "Has cycle: " << (hasCycle(adjList, n) ? "Yes" : "No") << endl;
 
     // Topological sorting
     cout << "Topological Order: ";
-    printTopologicalOrder(n, adjList);
+    printTopologicalOrder(adjList, n);
 
     // All paths from source to target using DFS
     cout << "All paths from node 0 to 3 using DFS:" << endl;
-    vector<vector<int>> paths = getAllPaths(0, 3, n, adjList);
+    vector<vector<int>> paths = getAllPaths(adjList, 0, 3, n);
     for (const auto &path : paths)
     {
         for (int node : path)
@@ -319,18 +324,25 @@ int main()
     // Undirected graph cycle detection demo
     vector<vector<int>> undirectedAdjList(n);
     // Cyclic undirected graph: 0-1, 1-2, 2-3, 3-0
-    undirectedAdjList[0].push_back(1); undirectedAdjList[1].push_back(0);
-    undirectedAdjList[1].push_back(2); undirectedAdjList[2].push_back(1);
-    undirectedAdjList[2].push_back(3); undirectedAdjList[3].push_back(2);
-    undirectedAdjList[3].push_back(0); undirectedAdjList[0].push_back(3);
-    cout << "Undirected cyclic graph has cycle: " << (hasCycleUndirected(n, undirectedAdjList) ? "Yes" : "No") << endl;
+    undirectedAdjList[0].push_back(1);
+    undirectedAdjList[1].push_back(0);
+    undirectedAdjList[1].push_back(2);
+    undirectedAdjList[2].push_back(1);
+    undirectedAdjList[2].push_back(3);
+    undirectedAdjList[3].push_back(2);
+    undirectedAdjList[3].push_back(0);
+    undirectedAdjList[0].push_back(3);
+    cout << "Undirected cyclic graph has cycle: " << (hasCycleUndirected(undirectedAdjList, n) ? "Yes" : "No") << endl;
 
     // Acyclic undirected graph: 0-1, 1-2, 2-3
     vector<vector<int>> undirectedAcyclicAdjList(n);
-    undirectedAcyclicAdjList[0].push_back(1); undirectedAcyclicAdjList[1].push_back(0);
-    undirectedAcyclicAdjList[1].push_back(2); undirectedAcyclicAdjList[2].push_back(1);
-    undirectedAcyclicAdjList[2].push_back(3); undirectedAcyclicAdjList[3].push_back(2);
-    cout << "Undirected acyclic graph has cycle: " << (hasCycleUndirected(n, undirectedAcyclicAdjList) ? "Yes" : "No") << endl;
+    undirectedAcyclicAdjList[0].push_back(1);
+    undirectedAcyclicAdjList[1].push_back(0);
+    undirectedAcyclicAdjList[1].push_back(2);
+    undirectedAcyclicAdjList[2].push_back(1);
+    undirectedAcyclicAdjList[2].push_back(3);
+    undirectedAcyclicAdjList[3].push_back(2);
+    cout << "Undirected acyclic graph has cycle: " << (hasCycleUndirected(undirectedAcyclicAdjList, n) ? "Yes" : "No") << endl;
 
     // Dijkstra's algorithm representation and call
     vector<vector<pair<int, int>>> weightedAdjList(n);
@@ -340,7 +352,7 @@ int main()
     weightedAdjList[1].push_back({3, 1});
     weightedAdjList[2].push_back({3, 5});
 
-    vector<int> dists = dijkstra(0, n, weightedAdjList);
+    vector<int> dists = dijkstra(weightedAdjList, 0, n);
     cout << "Dijkstra distances from 0: ";
     for (int d : dists)
     {

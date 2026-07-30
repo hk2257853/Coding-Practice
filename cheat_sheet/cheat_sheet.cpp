@@ -14,6 +14,9 @@ Topics covered:
 9. Maths (GCD, LCM)
 10. Modular arithmetic
 11. Recursion stack - see some DP and backtracking problems too
+12. All Subarrays Brute Force
+13. Stack Template (Monotonic Stack)
+14. Sliding Window Template (Fixed & Variable Window)
 */
 
 
@@ -156,9 +159,10 @@ int main()
     priority_queue<int, vector<int>, greater<int>> minHeap; // Min-heap
 
     // prefix sum
-    vector<int> prefixSum(vec.size(), 0);
+    int n = vec.size();
+    vector<int> prefixSum(n, 0);
     prefixSum[0] = vec[0];
-    for (size_t i = 1; i < vec.size(); i++)
+    for (int i = 1; i < n; i++)
     {
         prefixSum[i] = prefixSum[i - 1] + vec[i];
     }
@@ -217,6 +221,83 @@ int main()
     }
 
     // 14. Recursion stack - see some DP and backtracking problems too - just see my notes or previous submissions
+
+    // 15. All Subarrays Brute Force
+    vector<int> subArrVec = {1, 2, 3, 4};
+    n = subArrVec.size();
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i; j < n; j++)
+        {
+            // Subarray spans from index i to j
+            // e.g., process or print elements from index i to j
+        }
+    }
+
+    // 16. Stack Template (Monotonic Stack)
+    // 4 Main Variations:
+    // 1. Next Greater Element (NGE): Loop right -> left (i = n-1 to 0), pop while top <= arr[i]
+    // 2. Next Smaller Element (NSE): Loop right -> left (i = n-1 to 0), pop while top >= arr[i]
+    // 3. Previous Greater Element (PGE): Loop left -> right (i = 0 to n-1), pop while top <= arr[i]
+    // 4. Previous Smaller Element (PSE): Loop left -> right (i = 0 to n-1), pop while top >= arr[i]
+    // TIP: Store indices in stack instead of values to calculate distances/ranges (e.g. Histogram, Stock Span).
+
+    vector<int> stkArr = {4, 5, 2, 10, 8};
+    // nge - {5, 10, 10, -1, -1}
+    // stack represents valid candidates
+    // thus go right to left (as the ans gotta be present already)
+    n = stkArr.size();
+    vector<int> nge(n, -1);
+    stack<int> st; // stores elements (or store indices)
+    for (int i = n - 1; i >= 0; i--)
+    {
+        // remove invalid candidates (stk top is 8 and coming element is 10, thus for future elements 8 can never be answer)
+        while (!st.empty() && st.top() <= stkArr[i])
+        {
+            st.pop();
+        }
+        // top is the answer
+        if (!st.empty())
+        {
+            nge[i] = st.top();
+        }
+        st.push(stkArr[i]);
+    }
+
+    // if I need to pop for both sides (eg - cases where candidates expire) - use dequeue
+
+    // 17. Sliding Window Template
+    // 17.1 Fixed Window Size K
+    int winK = 3;
+    n = vec.size();
+    if (n >= winK)
+    {
+        int currentWindowSum = 0;
+        for (int i = 0; i < winK; i++)
+        {
+            currentWindowSum += vec[i];
+        }
+        int maxWindowSum = currentWindowSum;
+        for (int i = winK; i < n; i++)
+        {
+            currentWindowSum += vec[i] - vec[i - winK];
+            maxWindowSum = max(maxWindowSum, currentWindowSum);
+        }
+    }
+
+    // 17.2 Variable Window Size (Two Pointers: expand right, shrink left)
+    int left = 0;
+    for (int right = 0; right < n; right++)
+    {
+        // Expand window: include vec[right], e.g. currentSum += vec[right]
+        
+        while (/* condition_violated e.g. currentSum > target */ left <= right)
+        {
+            // Shrink window: exclude vec[left], e.g. currentSum -= vec[left]
+            left++;
+        }
+        // Update answer (e.g., max length = right - left + 1)
+    }
 
     return 0;
 }
