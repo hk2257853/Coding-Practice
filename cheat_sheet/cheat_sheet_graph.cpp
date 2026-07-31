@@ -17,11 +17,11 @@ void dfs(vector<vector<int>> &graph, int node, vector<bool> &isVisited)
 {
     cout << node << " ";               // print
     isVisited[node] = true;            // mark
-    for (int neighbor : graph[node]) // for neigh
+    for (const auto &neighNode : graph[node]) // for neigh
     {
-        if (!isVisited[neighbor]) // !vis
+        if (!isVisited[neighNode]) // !vis
         {
-            dfs(graph, neighbor, isVisited); // dfs
+            dfs(graph, neighNode, isVisited); // dfs
         }
     }
 }
@@ -31,21 +31,21 @@ void bfs(vector<vector<int>> &graph, int startNode)
 {
     vector<bool> isVisited(graph.size(), false);
     queue<int> q;
-    isVisited[startNode] = true;
-    q.push(startNode);
+    q.push(startNode);           // push
+    isVisited[startNode] = true; // mark
 
     while (!q.empty())
     {
         int node = q.front();
-        q.pop();
-        cout << node << " ";
+        cout << node << " "; // print
+        q.pop(); // pop
 
-        for (int neighbor : graph[node])
+        for (const auto &neighNode : graph[node]) // for neigh
         {
-            if (!isVisited[neighbor])
+            if (!isVisited[neighNode]) // !vis
             {
-                isVisited[neighbor] = true;
-                q.push(neighbor);
+                q.push(neighNode);   // push
+                isVisited[neighNode] = true;  // mark
             }
         }
     }
@@ -56,8 +56,8 @@ void bfs_with_level(vector<vector<int>> &graph, int startNode)
 {
     vector<bool> isVisited(graph.size(), false);
     queue<int> q;
-    isVisited[startNode] = true;
     q.push(startNode);
+    isVisited[startNode] = true;
     int level = 0;
 
     while (!q.empty())
@@ -67,15 +67,15 @@ void bfs_with_level(vector<vector<int>> &graph, int startNode)
         while (size--)
         {
             int node = q.front();
-            q.pop();
             cout << "Level " << level << ": " << node << " ";
+            q.pop();
 
-            for (int neighbor : graph[node])
+            for (const auto &neighNode : graph[node])
             {
-                if (!isVisited[neighbor])
+                if (!isVisited[neighNode])
                 {
-                    isVisited[neighbor] = true;
-                    q.push(neighbor);
+                    isVisited[neighNode] = true;
+                    q.push(neighNode);
                 }
             }
         }
@@ -90,35 +90,36 @@ void bfs_with_level(vector<vector<int>> &graph, int startNode)
 // in the breadth pick pick up the smallest element and cal dist.
 
 // Mistakes done while implementing:
-// 1) confused at pq.push({dist[neighbor], neighbor});
-// 2) if (d > dist[u]) continue; missing
-// 3) do int d = pq.top().first and for (const auto &edge : graph[u]) instead of indices to avoid mess/confusion.
+// 1) confused at pq.push({dist[neighNode], neighNode});
+// 2) if (nodeDist > dist[node]) continue; missing
+// 3) do int nodeDist = pq.top().first and for (const auto &neigh : graph[node]) instead of indices to avoid mess/confusion.
 vector<int> dijkstra(vector<vector<pair<int, int>>> &graph, int startNode, int n)
 {
     vector<int> dist(n, 1e9);                                                           // 1e9 represents infinity
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; // {distance, node}
 
-    dist[startNode] = 0;
     pq.push({0, startNode});
+    dist[startNode] = 0;
 
     while (!pq.empty())
     {
-        int d = pq.top().first;
-        int u = pq.top().second;
+        int nodeDist = pq.top().first;
+        int node = pq.top().second;
         pq.pop();
 
-        if (d > dist[u])
+        if (nodeDist > dist[node])
             continue; // stale data
 
-        for (const auto &edge : graph[u])
+        for (const auto &neigh : graph[node])
         {
-            int neighbor = edge.first;
-            int weight = edge.second;
+            int neighNode = neigh.first;
+            int neighWeight = neigh.second;
 
-            if (dist[u] + weight < dist[neighbor])
+            int newDist = dist[node] + neighWeight;
+            if (newDist < dist[neighNode])
             {
-                dist[neighbor] = dist[u] + weight;
-                pq.push({dist[neighbor], neighbor});
+                dist[neighNode] = newDist;
+                pq.push({newDist, neighNode});
             }
         }
     }
@@ -131,14 +132,14 @@ bool detectCycleDFS(vector<vector<int>> &graph, int node, vector<bool> &isVisite
     isVisited[node] = true;
     inStack[node] = true;
 
-    for (int neighbor : graph[node])
+    for (const auto &neighNode : graph[node])
     {
-        if (!isVisited[neighbor])
+        if (!isVisited[neighNode])
         {
-            if (detectCycleDFS(graph, neighbor, isVisited, inStack))
+            if (detectCycleDFS(graph, neighNode, isVisited, inStack))
                 return true;
         }
-        else if (inStack[neighbor])
+        else if (inStack[neighNode])
         {
             return true;
         }
@@ -170,14 +171,14 @@ bool detectCycleUndirectedDFS(vector<vector<int>> &graph, int node, int parent, 
 {
     isVisited[node] = true;
 
-    for (int neighbor : graph[node])
+    for (const auto &neighNode : graph[node])
     {
-        if (!isVisited[neighbor])
+        if (!isVisited[neighNode])
         {
-            if (detectCycleUndirectedDFS(graph, neighbor, node, isVisited))
+            if (detectCycleUndirectedDFS(graph, neighNode, node, isVisited))
                 return true;
         }
-        else if (neighbor != parent)
+        else if (neighNode != parent)
         {
             // neighbor is visited and it's not the parent -> cycle detected!
             return true;
@@ -205,11 +206,11 @@ bool hasCycleUndirected(vector<vector<int>> &graph, int n)
 void topoSortDFS(vector<vector<int>> &graph, int node, vector<bool> &isVisited, stack<int> &stk)
 {
     isVisited[node] = true;
-    for (int neighbor : graph[node])
+    for (const auto &neighNode : graph[node])
     {
-        if (!isVisited[neighbor])
+        if (!isVisited[neighNode])
         {
-            topoSortDFS(graph, neighbor, isVisited, stk);
+            topoSortDFS(graph, neighNode, isVisited, stk);
         }
     }
     stk.push(node);
@@ -248,11 +249,11 @@ void findAllPathsDFS(vector<vector<int>> &graph, int u, int target, vector<bool>
     }
     else
     {
-        for (int neighbor : graph[u])
+        for (const auto &neighNode : graph[u])
         {
-            if (!isVisited[neighbor])
+            if (!isVisited[neighNode])
             {
-                findAllPathsDFS(graph, neighbor, target, isVisited, currentPath, allPaths);
+                findAllPathsDFS(graph, neighNode, target, isVisited, currentPath, allPaths);
             }
         }
     }
@@ -286,9 +287,9 @@ int main()
     for (int i = 0; i < n; i++)
     {
         cout << "Node " << i << ": ";
-        for (int neighbor : adjList[i])
+        for (const auto &neighNode : adjList[i])
         {
-            cout << neighbor << " ";
+            cout << neighNode << " ";
         }
         cout << endl;
     }
@@ -314,7 +315,7 @@ int main()
     vector<vector<int>> paths = getAllPaths(adjList, 0, 3, n);
     for (const auto &path : paths)
     {
-        for (int node : path)
+        for (const auto &node : path)
         {
             cout << node << " ";
         }
@@ -354,7 +355,7 @@ int main()
 
     vector<int> dists = dijkstra(weightedAdjList, 0, n);
     cout << "Dijkstra distances from 0: ";
-    for (int d : dists)
+    for (const auto &d : dists)
     {
         cout << d << " ";
     }
