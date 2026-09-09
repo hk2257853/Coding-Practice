@@ -2,6 +2,10 @@
 Analyze Examples First: Inspect provided test cases carefully upfront to catch edge cases early.
 Act on Interviewer Hints: Avoid overthinking—start coding when directed rather than trying to figure everything out first.
 Respect Problem Constraints: Stick strictly to given constraints during explanations to avoid confusing the interviewer.
+If stuck or in doubt or having a feeling something might be an issue - dictate what's the confusion. I may or may not get the ans to it.
+read question properly -> missing details hurts.
+TODO: get the interview check list from Cayman
+
 
 🎯 Quality Improvements
 Master Standard Algorithms (BFS, DFS, Dijkstra): Practice common algorithms until code execution is flawless, avoiding the need to derive them on the spot.

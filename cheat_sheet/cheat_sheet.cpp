@@ -17,6 +17,8 @@ Topics covered:
 12. All Subarrays Brute Force
 13. Stack Template (Monotonic Stack)
 14. Sliding Window Template (Fixed & Variable Window)
+15. Merge Sort
+16. Digits & Alphabet Indexing (0 to 25)
 */
 
 
@@ -299,5 +301,80 @@ int main()
         // Update answer (e.g., max length = right - left + 1)
     }
 
+    // 16. Digits & Alphabet Indexing
+    // 1. Digits & Chars
+    int x = '4' - '0';       // char to int: '4' - '0' = 4
+    char c = 4 + '0';        // int to char: 4 + '0' = '4'
+
+    // 2. Alphabet Indexing (0 to 25)
+    string s = "leetcode";
+    int idx = s[0] - 'a';    // char to index: 'a'-'a' = 0, 'z'-'a' = 25
+    char ch = 'a' + idx;     // index to char: 'a' + 0 = 'a', 'a' + 1 = 'b', etc
+    int freq[26] = {0};      // freq array for 'a' to 'z'
+    freq[s[0] - 'a']++;
+    // (for uppercase, use s[i] - 'A')
+
     return 0;
+}
+
+// 15. Merge Sort
+// Imagining both halves as independent, already-sorted units helps a lot.
+// Visualize the splitting and merging with a diagram before coding —
+// this one is great: https://media.geeksforgeeks.org/wp-content/uploads/20200601174332/Merge-Sort-Tutorial.png
+//
+// This is recursion — don't try to trace the whole tree.
+// Just focus on the root and the very next level; that's enough to derive the logic.
+
+void merge(vector<int>& arr, int l, int r, int mid) {
+    // 1 3 4 7
+    // 2 3 8
+    // 1 2 3 3 4 7 8
+
+    vector<int> temp;
+    int lInd = l, rInd = mid + 1;
+
+    while (lInd <= mid && rInd <= r) {
+        if (arr[lInd] <= arr[rInd]) {
+            temp.push_back(arr[lInd]);
+            lInd++;
+        } else {
+            temp.push_back(arr[rInd]);
+            rInd++;
+        }
+    }
+
+    while (lInd <= mid) {
+        temp.push_back(arr[lInd]);
+        lInd++;
+    }
+
+    while (rInd <= r) {
+        temp.push_back(arr[rInd]);
+        rInd++;
+    }
+
+    // standard way
+    // for (int i = l; i <= r; i++) {
+    //     arr[i] = temp[i - l];
+    // }
+
+    // my way
+    int tInd = 0;
+    for (int i = l; i <= mid; i++, tInd++) {
+        arr[i] = temp[tInd];
+    }
+
+    for (int i = mid + 1; i <= r; i++, tInd++) {
+        arr[i] = temp[tInd];
+    }
+}
+
+void mergeSort(vector<int>& arr, int l, int r) {
+    if (l >= r) return; // size 0 or 1
+
+    int mid = l + (r - l) / 2;
+
+    mergeSort(arr, l, mid);
+    mergeSort(arr, mid + 1, r);
+    merge(arr, l, r, mid);
 }
