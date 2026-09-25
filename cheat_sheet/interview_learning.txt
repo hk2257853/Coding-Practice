@@ -5,7 +5,17 @@ Respect Problem Constraints: Stick strictly to given constraints during explanat
 If stuck or in doubt or having a feeling something might be an issue - dictate what's the confusion. I may or may not get the ans to it.
 read question properly -> missing details hurts.
 TODO: get the interview check list from Cayman
-
+Remeber the basics:
+constraints, empty, size 1, eg combinations/cases 
+I am taking up bad eg cases. Why is that. Earlier 
+eg scenarios:
+empty, size = 1
+increasing: 1,2,3,4,5
+decreasing: 5,4,3,2,1
+same values: 1,1,1,1,1
+duplicated: 1,2,2,3,3,4
+piramaid: 3,4,2,6,7
+valley: 8,5,1,4,3
 
 🎯 Quality Improvements
 Master Standard Algorithms (BFS, DFS, Dijkstra): Practice common algorithms until code execution is flawless, avoiding the need to derive them on the spot.
