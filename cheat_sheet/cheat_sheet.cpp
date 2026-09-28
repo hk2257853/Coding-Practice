@@ -19,9 +19,8 @@ Topics covered:
 14. Sliding Window Template (Fixed & Variable Window)
 15. Merge Sort
 16. Digits & Alphabet Indexing (0 to 25)
+17. Print All Submatrices of a 2D Matrix (Brute Force)
 */
-
-
 
 int main()
 {
@@ -202,6 +201,7 @@ int main()
 
     no of subarrays - n(n+1)/2
     no of sub sequences - 2^n (each element can be included or excluded)
+    no of submatrices - (n(n+1)/2) * (m(m+1)/2)
 
     */
 
@@ -290,6 +290,7 @@ int main()
     int left = 0;
     for (int right = 0; right < n; right++)
     {
+        // PWA
         // Expand window: include vec[right], e.g. currentSum += vec[right]
 
         while (/* condition_violated e.g. currentSum > target */ left <= right)
@@ -375,4 +376,66 @@ void mergeSort(vector<int> &arr, int l, int r)
     mergeSort(arr, l, mid);
     mergeSort(arr, mid + 1, r);
     merge(arr, l, r, mid);
+}
+
+// 17. Print All Possible Submatrices of a 2D Matrix (use 4 boundaries)
+/*
+The idea:
+
+Choose:
+(r1, c1) ─────── (r1, c2)
+   │                │
+   │   submatrix    │
+   │                │
+(r2, c1) ─────── (r2, c2)
+
+So you enumerate:
+* r1 = starting row
+* r2 = ending row
+* c1 = starting column
+* c2 = ending column
+
+TC:
+For simplicity imagine n*n matrix
+r1 - n times
+with in that r2 - n times
+
+c1 - n times
+with in that c2 - n times
+
+r and c done together so multiply - n^4
+
+Additionally, we have the print work. The submatrices have different sizes, roughly ranging from 1×1 to n×n, so the total printing work contributes another O(n^2) factor.
+
+Total: O(n^6)
+
+*/
+void printAllSubmatrices(vector<vector<int>> &mat)
+{
+    int n = mat.size();
+    int m = mat[0].size();
+
+    for (int r1 = 0; r1 < n; r1++)
+    {
+        for (int r2 = r1; r2 < n; r2++)
+        {
+            for (int c1 = 0; c1 < m; c1++)
+            {
+                for (int c2 = c1; c2 < m; c2++)
+                {
+                    // Submatrix: rows r1..r2, cols c1..c2
+                    for (int i = r1; i <= r2; i++)
+                    {
+                        for (int j = c1; j <= c2; j++)
+                        {
+                            cout << mat[i][j] << " ";
+                        }
+                        cout << endl;
+                    }
+
+                    cout << "---\n";
+                }
+            }
+        }
+    }
 }
